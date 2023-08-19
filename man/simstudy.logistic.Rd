@@ -23,6 +23,8 @@ simstudy.logistic(
 \arguments{
 \item{the.steps:}{A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:}
 
+\item{Normal:}{"X ~ N(100, 5)" with the mean and SD.}
+
 \item{Uniform}{"X ~ U(0, 100)" with the minimum and maximum.}
 
 \item{Poisson:}{"X ~ Poisson(3)" with the mean.}

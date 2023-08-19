@@ -1239,7 +1239,7 @@ simstudy.lm <- function(the.steps, n, num.experiments, the.formula, conf.level =
 
 #' @param  the.steps:  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
 
-#' @paramNormal:  "X ~ N(100, 5)" with the mean and SD.
+#' @param Normal:  "X ~ N(100, 5)" with the mean and SD.
 
 #' @param Uniform  "X ~ U(0, 100)" with the minimum and maximum.
 
