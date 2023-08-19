@@ -1,0 +1,615 @@
+---
+title: 'Simplified Simulations with the simitation Package for R 2'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction_to_simitation_2}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy = T)
+```
+
+```{r setup}
+library(data.table)
+library(simitation)
+```
+
+#### Two-Sample Tests of the Difference of Proportions {.tabset}
+
+##### Generating Data {.tabset}
+
+The **sim.prop2** method is used to generate binary data for a two-sample proportions test based on a probabilities of success $p_x$ and $p_y$ for samples of respective sizes $n_x$ and $n_y$ and the overall number of experiments $B$.
+
+
+```{r }
+simdat.prop2 <- sim.prop2(nx = 30, ny = 40, px = 0.5, py = 0.55, num.experiments = 1000, experiment.name = "sim", group.name = "treatment", x.value = "group_1", y.value = "group_2", value.name = "correct_answer", seed = 3)
+
+print(simdat.prop2)
+```
+
+##### Statistical Testing {.tabset}
+
+The **sim.prop2.test** method is used to implement two-sample tests of proportions (see **prop.test**) independently across the $B$ repeated experiments.  This is testing a hypothesized value of $p = p_x - p_y$ (which defaults to zero) in each of the $B$ simulated experiments.
+
+
+```{r }
+test.statistics.prop2 <- sim.prop2.test(simdat.prop2 = simdat.prop2, p = NULL, alternative = "less", conf.level = 0.95, correct = T, experiment.name = "sim", group.name = "treatment", x.value = "group_1", y.value = "group_2", value.name = "correct_answer")
+
+print(test.statistics.prop2)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.prop2** method summarizes the $B$ two-sample tests of proportions across the repeated experiments. 
+
+```{r }
+analysis.prop2 <- analyze.simstudy.prop2(test.statistics.prop2 = test.statistics.prop2, alternative = "less", conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.9, 0.975))
+print(analysis.prop2)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.prop2** method is used to a) generate data for experiments with two groups and a binary outcome, b) implement two-sample tests of proportions, and c) analyze these tests across the repeated experiments.
+
+```{r }
+study.prop2 <- simstudy.prop2(nx = 30, ny = 40, px = 0.5, py = 0.55, num.experiments = 1000, p = NULL, alternative = "less", conf.level = 0.95, correct = T, the.quantiles = c(0.025, 0.5, 0.975), experiment.name = "sim", group.name = "treatment", x.value = "treatment_1", y.value = "treatment_2", value.name = "correct_answer", seed = 904)
+print(study.prop2)
+```
+
+### $\chi^2$ Tests {.tabset}
+
+
+#### The $\chi^2$ Test of the Goodness of Fit {.tabset}
+
+##### Generating Data {.tabset}
+
+The **sim.chisq.gf** method is used to generate categorical data for a $\chi^2$ test of goodness of fit.  The specifications include the sample size $n$ of each experiment, the categorical values to be sampled, the probability density, and the overall number of experiments $B$.
+
+
+```{r }
+simdat.chisq.gf <- sim.chisq.gf(n = 100, values = LETTERS[1:4], prob = c(0.4, 0.3, 0.2, 0.1), num.experiments = 200, experiment.name = "experiment_id", value.name = "classification", seed = 31)
+
+print(simdat.chisq.gf)
+```
+
+##### Statistical Testing {.tabset}
+
+The **sim.chisq.test.gf** method is used to implement $\chi^2$ tests of goodness of fit (see chisq.test) independently across the $B$ repeated experiments.  This is testing the observed counts of the categorical values relative to those expected from the hypothesized probabilities.
+
+```{r warning=FALSE}
+test.statistics.chisq.test.gf <- sim.chisq.test.gf(simdat.chisq.gf = simdat.chisq.gf, hypothesized.probs = c(0.25, 0.3, 0.15, 0.3), correct = F, experiment.name = "experiment_id", value.name = "classification")
+
+print(test.statistics.chisq.test.gf)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.chisq.test.gf** method summarizes the $B$ $\chi^2$ tests of goodness of fit across the repeated experiments. 
+
+```{r }
+analysis.chisq.gf <- analyze.simstudy.chisq.test.gf(test.statistics.chisq.test.gf = test.statistics.chisq.test.gf, conf.level = 0.95, the.quantiles = c(0.25, 0.75))
+print(analysis.chisq.gf)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.chisq.test.gf** method is used to a) generate data for experiments with categorical data, b) implement $\chi^2$ tests of goodness of fit, and c) analyze these tests across the repeated experiments.
+
+
+```{r warning=FALSE}
+study.chisq.gf <- simstudy.chisq.test.gf(n = 75, values = LETTERS[1:4], actual.probs = c(0.3, 0.3, 0.2, 0.2), hypothesized.probs = rep.int(x = 0.25, times = 4), num.experiments = 40, conf.level = 0.95, correct = F, the.quantiles = c(0.25, 0.75), experiment.name = "experiment_id", value.name = "classification", seed = 61)
+
+print(study.chisq.gf)
+```
+
+#### The $\chi^2$ Test of Independence {.tabset}
+
+
+##### Generating Data {.tabset}
+
+The **sim.chisq.ind** method is used to generate categorical outcome data across the levels of a categorical independent variable for use in a $\chi^2$ test of independence.  The specifications include the sample size $n$ of each level of the independent variable (and within each experiment), the categorical values to be sampled, the probability density within each categorical level (specified as a matrix), and the overall number of experiments $B$.
+
+```{r }
+n <- c(50, 75, 100)
+values <- LETTERS[1:4]
+group.names <- sprintf("group_%d", 1:3)
+probs <- matrix(data = c(0.25, 0.25, 0.25, 0.25, 0.4, 0.3, 0.2, 0.1, 0.2, 0.4, 0.2, 0.2), nrow = length(n), byrow = T)
+
+
+simdat.chisq.ind <- sim.chisq.ind(n = c(50, 75, 100), values = LETTERS[1:4], probs = probs, num.experiments = 500, experiment.name = "exp_id", group.name = "treatment_group", group.values = sprintf("group_%d", 1:3), value.name = "category", seed = 31)
+
+print(simdat.chisq.ind)
+```
+
+##### Statistical Testing {.tabset}
+
+The **sim.chisq.test.ind** method is used to implement $\chi^2$ tests of independence (see chisq.test) independently across the $B$ repeated experiments.  This is testing the observed counts of the categorical values across the levels of the independent variable relative to those expected from a hypothesis of independence between the independent and dependent variables.
+
+```{r warning=FALSE}
+test.statistics.chisq.test.ind <- sim.chisq.test.ind(simdat.chisq.ind = simdat.chisq.ind, correct = T, experiment.name = "exp_id", group.name = "treatment_group", value.name = "category")
+
+print(test.statistics.chisq.test.ind)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.chisq.test.ind** method summarizes the $B$ $\chi^2$ tests of independence across the repeated experiments. 
+
+```{r }
+analysis.chisq.ind <- analyze.simstudy.chisq.test.ind(test.statistics.chisq.test.ind = test.statistics.chisq.test.ind, conf.level = 0.95, the.quantiles = c(0.025, 0.975))
+
+print(analysis.chisq.ind)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.chisq.test.ind** method is used to a) generate data for experiments with categorical independent and dependent variables, b) implement $\chi^2$ tests of independence, and c) analyze these tests across the repeated experiments.
+
+```{r warning=FALSE}
+
+study.chisq.ind <- simstudy.chisq.test.ind(n = c(30, 35, 40), values = LETTERS[1:4], probs = probs, num.experiments = 1000, conf.level = 0.95, correct = T, the.quantiles = c(0.025, 0.975), experiment.name = "exp_id", group.name = "treatment_group", group.values = sprintf("group_%d", 1:3), value.name = "category", seed = 77)
+
+print(study.chisq.ind)
+```
+
+### Multivariate Studies {.tabset}
+
+Simulation studies grow more complex in multivariate settings.  Generating multiple variables can require a specification of their distributions and interdependence.  The simitation package aims to simplify the creation of simulated data in multivariate settings.  This is achived through a number of steps:
+
+1) Specify the variables to generate using symbolic inputs.
+
+2) Allow for dependent relationships in the variables through specifications of regression formulas.
+
+3) Then generate simulated data sets basesd only on the symbolic inputs.
+
+We will discuss this approach in the sections below.
+
+#### Symbolic Inputs
+
+Using an example of a health and wellness study, we aim to simulate data for a study that aims to model:
+
+* **Outcome 1:  Healthy Lifestyle**: a binary classification of a subject's lifestyle.
+
+* **Outcome 2:  Weight**:  A continuous measurement of a subject's weight.
+
+These outcomes will be modeled in terms of the following covariates:
+
+* Age $\sim N(45, 10)$;
+* Female gender $\sim \texttt{Bin}(n = 1, p = 0.53)$;
+* A continuous health percentile score $\sim U(0, 100)$;
+* The number of exercise sessions per week $\sim \texttt{Poisson}(\lambda = 2)$
+* A categorical classification of the subject's diet with $P(D = \texttt{Light}) = 0.2, P(D = \texttt{Moderate}) = 0.45, P(D = \texttt{Heavy}) = 0.35$.
+
+Basic functions in R such as rnorm(), sample(), runif(), and rpois() could be used to generate these values.  However, the simitation package allows the specifications to remain symbolic, as seen below:
+
+
+```{r }
+step.age <- "Age ~ N(45, 10)"
+step.female <- "Female ~ binary(0.53)"
+step.health.percentile <- "Health.Percentile ~ U(0,100)"
+step.exercise.sessions <- "Exercise.Sessions ~ Poisson(2)"
+
+step.diet <- "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))"
+```
+
+Then we can create a regression formula as the symbolic representation for the binary **Healthy.Lifestyle** variable:
+
+```{r }
+step.healthy.lifestyle <- "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
+```
+
+Likewise, we can build a linear regression formula for the Weight outcome:
+
+```{r }
+step.weight <- "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))"
+```
+
+Note that this regression formula includes a specification of the error terms in terms of a distribution, e.g. $N(0,10)$.
+
+Finally, we can concatenate these symbolic inputs into a variable **the.steps** that will be used as an input to multivariate simulations.
+
+```{r }
+the.steps <- c(step.age, step.female, step.health.percentile, step.exercise.sessions, step.diet, step.healthy.lifestyle, step.weight)
+
+print(the.steps)
+```
+
+#### Generating Multivariate Data
+
+The **simulation.steps** method creates multivariate simulated data based on **the.steps** (specified in the previous section), the sample size $n$ for a single experiment, and the overall number of experiments $B$.
+
+```{r }
+simdat.multivariate <- simulation.steps(the.steps = the.steps, n = 50, num.experiments = 200, experiment.name = "sim", seed = 41)
+
+print(simdat.multivariate)
+```
+
+#### Linear Regression {.tabset}
+
+##### Modeling {.tabset}
+
+The **sim.statistics.lm** model is used to separately fit linear regression models in each experiment (as specified by the grouping.variables).  This relies upon the simulated multivariate data as well as the intended formula for the linear regression model.
+
+```{r }
+stats.lm <- sim.statistics.lm(simdat = simdat.multivariate, the.formula = Weight ~ Age + Female + Health.Percentile + Exercise.Sessions + Healthy.Lifestyle, grouping.variables = "sim")
+
+print(stats.lm)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.lm** summarizes the $B$ linear regression models across the repeated experiments. 
+
+```{r }
+analysis.lm <- analyze.simstudy.lm(the.coefs = stats.lm$the.coefs, summary.stats = stats.lm$summary.stats, conf.level = 0.95, the.quantiles = c(0.25, 0.75), coef.name = "Coefficient", estimate.name = "Estimate", lm.p.name = "Pr(>|t|)", f.p.name = "f.pvalue")
+print(analysis.lm)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.lm** method is used to a) generate multivariate data for experiments, b) implement linear regression models, and c) analyze these models across the repeated experiments.
+
+```{r }
+study.lm <- simstudy.lm(the.steps = the.steps, n = 100, num.experiments = 1000, the.formula = Weight ~ Age + Female + Health.Percentile + Exercise.Sessions + Healthy.Lifestyle, conf.level = 0.95, the.quantiles = c(0.25, 0.75), experiment.name = "sim", seed = 11)
+
+print(study.lm)
+```
+
+#### Logistic Regression {.tabset}
+
+##### Modeling {.tabset}
+
+The **sim.statistics.logistic** model is used to separately fit logistic regression models in each experiment (as specified by the grouping.variables).  This relies upon the simulated multivariate data as well as the intended formula for the logistic regression model.
+
+```{r }
+stats.logistic <- sim.statistics.logistic(simdat = simdat.multivariate, the.formula = Healthy.Lifestyle ~ Age + Female + Health.Percentile + Exercise.Sessions, grouping.variables = "sim")
+
+print(stats.logistic)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.logistic** summarizes the $B$ logistic regression models across the repeated experiments. 
+
+```{r }
+analysis.logistic <- analyze.simstudy.logistic(the.coefs = stats.logistic$the.coefs, summary.stats = stats.logistic$summary.stats, conf.level = 0.95, the.quantiles = c(0.1, 0.9))
+
+print(analysis.logistic)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.logistic** method is used to a) generate multivariate data for experiments, b) implement logistic regression models, and c) analyze these models across the repeated experiments.
+
+```{r }
+study.logistic <- simstudy.logistic(the.steps = the.steps, n = 100, num.experiments = 1000, the.formula = Healthy.Lifestyle ~ Age + Female + Health.Percentile + Exercise.Sessions, conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.5, 0.9, 0.975), experiment.name = "sim", seed = 222)
+
+print(study.logistic)
+```
+
+
+## Applications {.tabset}
+
+Simulation studies can be used to investigate or substantiate many qualities of a planned study.  In this section, we will illustrate some of the applications of the earlier results.
+
+### Range of Estimates and Test Statistics {.tabset}
+
+#### One-Sample $t$ Test {.tabset}
+
+##### Estimates
+
+
+```{r }
+study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 1000, alternative = "greater", mu = 0, conf.level = 0.95, the.quantiles = c(0.025, 0.975), experiment.name = "experiment",value.name = "x", seed = 817)
+print(study.t)
+```
+
+This demonstrates the selected quantiles, mean, and standard error for the estimated mean of the one-sample $t$ test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.t$sim.analysis.t$estimate.summary)
+```
+
+
+##### Test Statistics
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the one-sample $t$ test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.t$sim.analysis.t$stat.summary)
+```
+
+
+#### Two-Sample $t$ Test {.tabset}
+
+##### Estimates
+```{r }
+study.t2 <- simstudy.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 500, alternative = "less", mu = 0, conf.level = 0.9, the.quantiles = c(0.1, 0.5, 0.9), experiment.name = "experiment_id", group.name = "category", x.value = "a", y.value = "b", value.name = "measurement", seed = 41)
+print(study.t2)
+```
+
+This demonstrates the selected quantiles, mean, and standard error for the estimated difference in means of the two-sample $t$ test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.t2$sim.analysis.t2$estimate.summary)
+```
+
+##### Test Statistics
+
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the two-sample $t$ test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.t2$sim.analysis.t2$stat.summary)
+```
+
+
+#### One Sample Proportions Test {.tabset}
+
+##### Estimates
+
+```{r }
+study.prop <- simstudy.prop(n = 30, p.actual = 0.42, p.hypothesized = 0.5, num.experiments = 500, alternative = "less", conf.level = 0.92, correct = T, the.quantiles = c(0.04, 0.5, 0.96), experiment.name = "simulation_id", value.name = "success", seed = 8001)
+print(study.prop)
+```
+
+This demonstrates the selected quantiles, mean, and standard error for the estimated success probability of the one-sample proportions test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.prop$sim.analysis.prop$estimate.summary)
+```
+
+##### Test Statistics
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the one-sample proportions test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.prop$sim.analysis.prop$stat.summary)
+```
+
+
+#### Two Sample Proportions Test {.tabset}
+
+##### Estimates
+
+This demonstrates the selected quantiles, mean, and standard error for the estimated difference in proportions of the two-sample proportions test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.prop2$sim.analysis.prop2$estimate.summary)
+```
+
+##### Test Statistics
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the two-sample proportions test based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.prop2$sim.analysis.prop2$stat.summary)
+```
+
+#### $\chi^2$ Squared Test of Goodness of Fit {.tabset}
+
+##### Test Statistics
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the $\chi^2$ test of goodness of fit based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.chisq.gf$sim.analysis$stat.summary)
+```
+
+#### $\chi^2$ Squared Test of Independence {.tabset}
+
+##### Test Statistics
+
+This demonstrates the selected quantiles, mean, and standard error for the test statistics of the $\chi^2$ test of independence based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.chisq.ind$sim.analysis$stat.summary)
+```
+
+
+#### Linear Regression {.tabset}
+
+##### Estimated Coefficients
+
+This demonstrates the selected quantiles, mean, and standard errors of the estimated coefficients of the linear regression model based upon the $B$ experiments conducted in the simulation study.
+
+
+```{r }
+print(study.lm$sim.analysis$lm.estimate.summary)
+```
+
+
+#### Logistic Regression {.tabset}
+
+##### Estimated Coefficients
+
+This demonstrates the selected quantiles, mean, and standard errors of the estimated coefficients of the logistic regression model based upon the $B$ experiments conducted in the simulation study.
+
+```{r }
+print(study.logistic$sim.analysis$logistic.estimate.summary)
+```
+
+### Type I Error Rates {.tabset}
+
+The rate of false positive conclusions can be empirically investigated in a simulation study of repeated experiments.  This is performed when the data are generated under a scenario of no effect.
+
+#### One-Sample $t$ Test {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a one-sample $t$ test.
+
+```{r }
+study.noeffect.t <- simstudy.t(n = 15, mean = 0, sd = 2, num.experiments = 1000, seed = 71)
+
+print(study.noeffect.t$sim.analysis.t$p.value.summary)
+```
+
+#### Two-Sample $t$ Test {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a two-sample $t$ test.
+
+```{r }
+study.noeffect.t2 <- simstudy.t2(nx = 20, ny = 25, meanx = 0, meany = 0, sdx = 1, sdy = 1, num.experiments = 1000, alternative = "greater", seed = 129)
+
+print(study.noeffect.t2$sim.analysis.t2$p.value.summary)
+```
+
+#### One Sample Proportions Test {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a one-sample proportions test.
+
+```{r }
+study.noeffect.prop <- simstudy.prop(n = 40, p.actual = 0.25, p.hypothesized = 0.25, num.experiments = 1000, alternative = "less", conf.level = 0.95, seed = 98)
+
+print(study.noeffect.prop$sim.analysis.prop$p.value.summary)
+```
+
+
+#### Two Sample Proportions Test {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a two-sample proportions test.
+
+```{r }
+study.noeffect.prop2 <- simstudy.prop2(nx = 40, ny = 40, px = 0.4, py = 0.4, num.experiments = 1000, alternative = "two.sided", conf.level = 0.95, seed = 71)
+
+print(study.noeffect.prop2$sim.analysis.prop2$p.value.summary)
+```
+
+#### $\chi^2$ Squared Test of Goodness of Fit {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a $\chi^2$ test of goodness of fit in which the data are generated from the hypothesized distribution.
+
+```{r }
+study.noeffect.chisq.gf <- simstudy.chisq.test.gf(n = 100, values = LETTERS[1:5], actual.probs = rep.int(x = 0.2, times = 5), hypothesized.probs = rep.int(x = 0.2, times = 5), num.experiments = 1000, conf.level = 0.95, seed = 3)
+
+print(study.noeffect.chisq.gf$sim.analysis$p.value.summary)
+```
+
+#### $\chi^2$ Squared Test of Independence {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a $\chi^2$ test of independence in which the data are generated from the hypothesized distribution.
+
+```{r warning=FALSE}
+study.noeffect.chisq.ind <- simstudy.chisq.test.ind(n = c(50, 50), values = LETTERS[1:5], probs = matrix(data = 0.2, nrow = 2, ncol = 5), num.experiments = 1000, conf.level = 0.95, seed = 8)
+
+print(study.noeffect.chisq.ind$sim.analysis$p.value.summary)
+```
+
+
+#### Linear Regression {.tabset}
+
+##### Estimated Coefficients
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a linear regression in which the Health.Score does not depend on the subject's Weight.
+
+```{r }
+study.noeffect.lm <- simstudy.lm(the.steps = c("Age ~ N(50,10)", "Weight ~ N(150, 10)", "Health.Score ~ lm(47 + 0.1 * Age + N(0, 5))"), n = 100, num.experiments = 1000, the.formula = Health.Score ~ Age + Weight, conf.level = 0.9, seed = 4)
+
+print(study.noeffect.lm$sim.analysis$lm.p.summary)
+```
+
+
+#### Logistic Regression {.tabset}
+
+Here we show the rate of Type I errors (rejected null hypotheses) and true negatives (non-rejected null hypotheses) for a logistic regression in which the Hospital status does not depend on the subject's Weight.
+
+```{r }
+study.noeffect.logistic <- simstudy.logistic(the.steps = c("Age ~ N(50,10)", "Weight ~ N(150, 10)", "Hospital ~ logistic(-2 + 0.05 * Age)"), n = 100, num.experiments = 100, the.formula = Hospital ~ Age + Weight, conf.level = 0.4, seed = 31)
+
+print(study.noeffect.logistic$sim.analysis$logistic.p.summary)
+```
+
+
+### Statistical Power {.tabset}
+
+When an effect exists, the rate of true positive conclusions can be empirically investigated in a simulation study of repeated experiments.
+
+#### One-Sample $t$ Test {.tabset}
+
+Here we show the rate of Type II errors (non-rejected null hypotheses) and true positives for a one-sample $t$ test.
+
+
+```{r }
+study.effect.t <- simstudy.t(n = 50, mean = 0.3, sd = 1, num.experiments = 1000, alternative = "greater", seed = 44)
+
+print(study.effect.t$sim.analysis.t$p.value.summary)
+```
+
+#### Two-Sample $t$ Test {.tabset}
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a two-sample $t$ test.
+
+```{r }
+study.effect.t2 <- simstudy.t2(nx = 100, ny = 100, meanx = 52, meany = 50, sdx = 5, sdy = 5, num.experiments = 1000, seed = 93, alternative = "two.sided")
+
+print(study.effect.t2$sim.analysis.t2$p.value.summary)
+```
+
+#### One Sample Proportions Test {.tabset}
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a one-sample proportions test.
+
+```{r }
+study.effect.prop <- simstudy.prop(n = 300, p.actual = 0.8, p.hypothesized = 0.75, num.experiments = 1000, alternative = "greater", conf.level = 0.95, seed = 81)
+
+print(study.effect.prop$sim.analysis.prop$p.value.summary)
+```
+
+
+#### Two Sample Proportions Test {.tabset}
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a two-sample proportions test.
+
+```{r }
+study.effect.prop2 <- simstudy.prop2(nx = 500, ny = 500, px = 0.5, py = 0.45, num.experiments = 1000, alternative = "greater", conf.level = 0.95, seed = 117)
+
+print(study.effect.prop2$sim.analysis.prop2$p.value.summary)
+```
+
+#### $\chi^2$ Squared Test of Goodness of Fit {.tabset}
+
+Here we show the rate of Type II errors (non-rejected null hypotheses) and true positives for a $\chi^2$ test of goodness of fit.
+
+```{r }
+study.effect.chisq.gf <- simstudy.chisq.test.gf(n = 100, values = LETTERS[1:5], actual.probs = c(0.3, 0.35, 0.15, 0.1, 0.1), hypothesized.probs = rep.int(x = 0.2, times = 5), num.experiments = 1000, conf.level = 0.95, seed = 83)
+
+print(study.effect.chisq.gf$sim.analysis$p.value.summary)
+```
+
+#### $\chi^2$ Squared Test of Independence {.tabset}
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a $\chi^2$ test of independence.
+
+```{r warning=FALSE}
+study.effect.chisq.ind <- simstudy.chisq.test.ind(n = c(300, 300), values = LETTERS[1:5], probs = matrix(data = c(0.25, 0.25, 0.2, 0.2, 0.1, rep.int(x = 0.2, times = 5)), nrow = 2, ncol = 5, byrow = T), num.experiments = 1000, conf.level = 0.95, seed = 8)
+
+print(study.effect.chisq.ind$sim.analysis$p.value.summary)
+```
+
+
+#### Linear Regression {.tabset}
+
+##### Estimated Coefficients
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a linear regression in which the Health.Score depends on the subject's Weight.
+
+```{r }
+study.effect.lm <- simstudy.lm(the.steps = c("Age ~ N(50,10)", "Weight ~ N(150, 10)", "Health.Score ~ lm(40 + 0.1 * Age + 0.05 * Weight + N(0, 5))"), n = 100, num.experiments = 1000, the.formula = Health.Score ~ Age + Weight, conf.level = 0.9, seed = 4)
+
+print(study.effect.lm$sim.analysis$lm.p.summary)
+```
+
+
+#### Logistic Regression {.tabset}
+
+Here we show the rates of Type II errors (non-rejected null hypotheses) and true positives for a logistic regression in which the Hospital status depends on the subject's Weight.
+
+```{r }
+glm.steps <- c("Age ~ N(50,10)", "Weight ~ N(170, 15)", "Hospital ~ logistic(-2 + 0.1 * (Age-50) + 0.08 * (Weight-170))")
+
+study.effect.logistic <- simstudy.logistic(the.steps = glm.steps, n = 100, num.experiments = 100, the.formula = Hospital ~ Age + Weight, conf.level = 0.95, seed = 31)
+
+print(study.effect.logistic$sim.analysis$logistic.p.summary)
+```
+

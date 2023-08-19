@@ -1,0 +1,179 @@
+---
+title: 'Simplified Simulations with the simitation Package for R'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction_to_simitation}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy = T)
+```
+#  {.tabset}
+
+## Introduction {.tabset}
+
+Simulation techniques provide a powerful technique for exploring the range of quantitative results that may be produced in a study.  Simulations allow an investigator to design scenarios, generate sample data, and perform analyses.  This is especially helpful for statistical planning of designed studies.  Sensitivity analyses can be easily implemented by altering the scenario.  R programmers have the tools to create and analyze simulation studies.  However, this can involve a complex process with many steps.  The simitation package is designed to simplify this process.  Its methods allow a user to a) generate data for repeated experiements, b) implement the planned statistical methods, and c) analyze the results of the simulation study, all in a single call to a function.  The package also simplifies the process of generating data by allowing for symbolic inputs of variables.  This vignette will introduce the methods of the simitation package and describe relevant applications.
+
+The steps of a simulation study can be separated into three components:
+
+1.  **Generating Data**:  This builds the relevant data structure by randomly generating values for each variable.  The amount of data is determined by the sample size for a single experiment $n$ and the number of experiments $B$.
+
+2.  **Analyzing Individual Experiments**:  The statistical analysis plan for a single experiment with $n$ data points may involve statistical testing or modeling.  In this step, we apply the intended analyses separately in each of the $B$ experiments.
+
+3.  **Analyzing the Results Across the Experiments**:  The results of the $B$ experiments may also be analyzed collectively.  Here we might be interested in the range of the estimates, the Type I error rate, the observed statistical power, or other empirical measurements from the simulation.
+
+The simitation package develops methods to address these three steps in common statistical tests or models, such as $t$ tests, tests of proportions, $\chi^2$ tests of goodness of fit and of independence, linear regression, and logistic regression.  These methods are first developed independently.  Then we unify these methods with a fourth function that implements all three.  As a result, it is possible to generate data, implement the tests or models, and analyze the repeated experiments, often in a single call to a function.
+
+The following sections provide examples of the methods and applications of the simitation package.
+
+
+## Methods {.tabset}
+
+
+```{r, include=FALSE}
+devtools::load_all(".")
+```
+
+```{r setup}
+library(data.table)
+library(simitation)
+```
+
+
+### $t$ Tests {.tabset}
+
+
+#### One-Sample $t$ Tests {.tabset}
+
+
+##### Generating Data {.tabset}
+
+We begin with a setting for an experiment that will collect $n = 25$ independent, identically distributed data points from a Normal distribution.  We use the sim.t() method to generate data for 2 separate experiments.  All of the simulated records are aggregated into a single data.table object.
+
+```{r }
+simdat.t <- sim.t(n = 25, mean = 0.3, sd = 1,  num.experiments = 100, experiment.name = "experiment", value.name = "x", seed = 2187)
+print(simdat.t)
+```
+
+
+A number of the parameters of this method will be used consistently in many of the methods.  The num.experiments will be used to provide the value of $B$.  The experiment.name will be the column name that associates a record to one specific experiment among the $B$ possibilities.  The variable.name also refers to the name of a column heading, in this case for the generated values.  The user may select the random number generator with vstr and set the randomization seed.  Other parameters, such as the mean and sd, are more specific to the setting of a one-sample $t$ test.
+
+
+##### Statistical Testing {.tabset}
+
+The **sim.t.test** method is used to implement one-sample $t$ tests (see **t.test**) independently across the $B$ repeated experiments.  The data are grouped based on the value of the column identified by experiment.name.  The user may specify the parameters of that $t$ test, such as the alternative, mu, and conf.level.  The relevant information for each test is extracted into a data.table object with $B$ rows.
+
+```{r }
+#value.name = "x"
+test.statistics.t <- sim.t.test(simdat.t = simdat.t, alternative = "greater", mu = 0, conf.level = 0.95, experiment.name = "experiment", value.name = "x")
+print(test.statistics.t)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The statistical results from the $B$ independent $t$ tests are then analyzed.  Separate analyses of the estimates, test statistics, rates of rejection, and confidence limits are provided.  The rates of rejection are framed in terms of the proportion of the $p$ values below the significance level $\alpha$ (or 1 minus the confidence limit).  The estimates, test statistics, and confidence limits are analyzed in terms of means, standard errors, and empirical quantiles.  For the confidence limits, the results will differ based on whether the alternative is two-sided or not.
+
+```{r }
+analysis.t <- analyze.simstudy.t(test.statistics.t = test.statistics.t, conf.level = 0.95, alternative = "greater", the.quantiles = c(0.025, 0.25, 0.25, 0.5, 0.75, 0.975))
+
+print(analysis.t)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.t** method is used to a) generate data for experiments with one group and a continuous outcome that follows a Normal distribution, b) implement one-sample $t$ tests, and c) analyze these tests across repeated experiments.
+
+```{r }
+study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 1000, alternative = "greater", mu = 0, conf.level = 0.95, the.quantiles = c(0.025, 0.975), experiment.name = "experiment",value.name = "x", seed = 817)
+print(study.t)
+```
+
+#### Two-Sample $t$ Tests {.tabset}
+
+##### Generating Data {.tabset}
+
+Simulations based on a two-sample $t$ test follow a similar form.  Here we are simulating an experiment that will collect $n_x = 30$ data points for group $x$ and $n_y = 40$ records for group $y$.  This is generated with $\mu_x = 0$ and $\mu_y = 0.2$, with a common standard deviation of $\sigma_x = \sigma_y = 1$.  The **sim.t2** method generates data for $B = 500$ experiments.  
+
+```{r }
+simdat.t2 <- sim.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 500, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value", seed = 17)
+print(simdat.t2)
+```
+
+##### Statistical Testing {.tabset}
+
+The **sim.t2.test** method is used to implement two-sample $t$ tests (see **t.test**) independently across the $B$ repeated experiments.
+
+The data are grouped based on the value of the column identified by experiment.name.  Within each group, a two-sample $t$ test is implemented.  The user may specify the parameters of that $t$ test, such as the alternative, mu, and conf.level.  The relevant information for each test is extracted into a data.table object with $B$ rows.
+
+```{r }
+test.statistics.t2 <- sim.t2.test(simdat.t2 = simdat.t2, alternative = "less", mu = 0, conf.level = 0.9, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value")
+
+print(test.statistics.t2)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+We can analyze the $B$ independent tests by setting the confidence level (e.g. 0.9), form of the alternative hypothesis, and desired quantiles to display in the summary results:
+
+
+```{r }
+analysis.t2 <- analyze.simstudy.t2(test.statistics.t2 = test.statistics.t2, alternative = "less", conf.level = 0.9, the.quantiles = c(0.25, 0.5, 0.75))
+print(analysis.t2)
+```
+
+##### Full Simulation Study {.tabset}
+
+
+The **simstudy.t2** method is used to a) generate data for experiments with two groups and a continuous outcome that follows a Normal distribution, b) implement two-sample $t$ tests, and c) analyze these tests across repeated experiments.
+
+```{r }
+study.t2 <- simstudy.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 500, alternative = "less", mu = 0, conf.level = 0.9, the.quantiles = c(0.1, 0.5, 0.9), experiment.name = "experiment_id", group.name = "category", x.value = "a", y.value = "b", value.name = "measurement", seed = 41)
+print(study.t2)
+```
+
+### Tests of Propotions {.tabset}
+
+#### One-Sample Tests of Proportions {.tabset}
+
+##### Generating Data {.tabset}
+
+The **sim.prop** method is used to generate binary data for a one-sample proportions test based on a probability of success $p$, the sample size for one experiment $n$, and the overall number of experiments $B$.
+
+```{r }
+simdat.prop <- sim.prop(n = 30, p = 0.45, num.experiments = 1000, experiment.name = "simulation_id", value.name = "success", seed = 104)
+print(simdat.prop)
+```
+
+##### Statistical Testing {.tabset}
+
+
+The **sim.prop.test** method is used to implement one-sample tests of proportions (see **prop.test**) independently across the $B$ repeated experiments.   This is testing a hypothesized value of $p$ (which defaults to 0.5) in each of the $B$ simulated experiments.
+
+```{r }
+test.statistics.prop <- sim.prop.test(simdat.prop = simdat.prop, p = 0.5, alternative = "two.sided", conf.level = 0.99, correct = T, experiment.name = "simulation_id", value.name = "success")
+print(test.statistics.prop)
+```
+
+##### Analyzing the Simulation Study {.tabset}
+
+The **analyze.simstudy.prop** method summarizes the $B$ one-sample tests of proportions across the repeated experiments. 
+
+```{r }
+analysis.prop <- analyze.simstudy.prop(test.statistics.prop = test.statistics.prop, alternative = "two.sided", conf.level = 0.99, the.quantiles = c(0.005, 0.995))
+print(analysis.prop)
+```
+
+##### Full Simulation Study {.tabset}
+
+The **simstudy.prop2** method is used to a) generate data for experiments with one group and a binary outcome, b) implement one-sample tests of proportions, and c) analyze these tests across the repeated experiments.
+
+
+```{r }
+study.prop <- simstudy.prop(n = 30, p.actual = 0.42, p.hypothesized = 0.5, num.experiments = 500, alternative = "less", conf.level = 0.92, correct = T, the.quantiles = c(0.04, 0.5, 0.96), experiment.name = "simulation_id", value.name = "success", seed = 8001)
+print(study.prop)
+```
+
+
+
