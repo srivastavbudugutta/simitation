@@ -12,13 +12,13 @@ analyze.simstudy.t(
 )
 }
 \arguments{
-\item{test.statistics.t:}{Summary information for fitting one-sample t tests.  Structure is in the form returned by the function simitation::sim.t.test().}
+\item{test.statistics.t}{Summary information for fitting one-sample t tests.  Structure is in the form returned by the function simitation::sim.t.test().}
 
-\item{alternative:}{See help(t.test).}
+\item{alternative}{See help(t.test).}
 
-\item{conf.level:}{See help(t.test)}
+\item{conf.level}{See help(t.test)}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 }
 \description{
 analyze.simstudy.t

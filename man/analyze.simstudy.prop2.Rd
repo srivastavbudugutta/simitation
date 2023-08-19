@@ -12,13 +12,13 @@ analyze.simstudy.prop2(
 )
 }
 \arguments{
-\item{test.statistics.prop2:}{Summary information for fitting two-sample tests of proportions.  Structure is in the form returned by the function simitation::sim.prop2.test().}
+\item{test.statistics.prop2}{Summary information for fitting two-sample tests of proportions.  Structure is in the form returned by the function simitation::sim.prop2.test().}
 
-\item{alternative:}{See help(prop.test).}
+\item{alternative}{See help(prop.test).}
 
-\item{conf.level:}{See help(prop.test).}
+\item{conf.level}{See help(prop.test).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 }
 \description{
 analyze.simstudy.prop2

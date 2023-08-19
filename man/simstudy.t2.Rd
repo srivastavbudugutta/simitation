@@ -27,41 +27,43 @@ simstudy.t2(
 )
 }
 \arguments{
-\item{nx:}{A numeric value for the number of observations in the x group for each experiment.}
+\item{nx}{A numeric value for the number of observations in the x group for each experiment.}
 
-\item{ny:}{A numeric value for the number of observations in the y group for each experiment.}
+\item{ny}{A numeric value for the number of observations in the y group for each experiment.}
 
-\item{meanx:}{A numeric value for the expected value of the x group used in the simulation.}
+\item{meanx}{A numeric value for the expected value of the x group used in the simulation.}
 
-\item{meany:}{A numeric value for the expected value of the y group used in the simulation.}
+\item{meany}{A numeric value for the expected value of the y group used in the simulation.}
 
-\item{sdx:}{A numeric value for the standard deviation of the x group used in the simulation.}
+\item{sdx}{A numeric value for the standard deviation of the x group used in the simulation.}
 
-\item{sdy:}{A numeric value for the standard deviation of the y group used in the simulation.}
+\item{sdy}{A numeric value for the standard deviation of the y group used in the simulation.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{alternative:}{See help(t.test).}
+\item{alternative}{See help(t.test).}
 
-\item{mu:}{See help(t.test)}
+\item{mu}{See help(t.test)}
 
-\item{conf.level:}{See help(t.test)}
+\item{var.equal}{A logical indicating whether to treat the two variances as being equal. If TRUE, then a pooled variance is used to estimate the variance, otherwise the variances are estimated separately. See help(t.test).}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{conf.level}{See help(t.test)}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{x.value:}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{y.value:}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{value.name:}{A character value specifying the name of the column that contains the value of the simulated data.}
+\item{x.value}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{y.value}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{value.name}{A character value specifying the name of the column that contains the value of the simulated data.}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simstudy.t2

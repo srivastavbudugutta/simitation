@@ -15,19 +15,19 @@ sim.prop.test(
 )
 }
 \arguments{
-\item{simdat.prop:}{Data for use in one-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop().}
+\item{simdat.prop}{Data for use in one-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop().}
 
-\item{p:}{See help(prop.test).}
+\item{p}{See help(prop.test).}
 
-\item{alternative:}{See help(prop.test).}
+\item{alternative}{See help(prop.test).}
 
-\item{conf.level:}{See help(prop.test).}
+\item{conf.level}{See help(prop.test).}
 
-\item{correct:}{See help(prop.test).}
+\item{correct}{See help(prop.test).}
 
-\item{experiment.name:}{A character value providing the name of the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name of the column identifying the experiment.}
 
-\item{value.name:}{A character value providing the name of the column identifying the values.}
+\item{value.name}{A character value providing the name of the column identifying the values.}
 }
 \description{
 sim.prop.test

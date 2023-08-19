@@ -19,27 +19,27 @@ sim.t2.test(
 )
 }
 \arguments{
-\item{simdat.t2:}{Data for use in two-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t2().}
+\item{simdat.t2}{Data for use in two-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t2().}
 
-\item{alternative:}{See help(t.test).}
+\item{alternative}{See help(t.test).}
 
-\item{mu:}{See help(t.test)}
+\item{mu}{See help(t.test)}
 
-\item{paired:}{See help(t.test)}
+\item{paired}{See help(t.test)}
 
-\item{var.equal:}{See help(t.test)}
+\item{var.equal}{See help(t.test)}
 
-\item{conf.level:}{See help(t.test)}
+\item{conf.level}{See help(t.test)}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{x.value:}{A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.}
+\item{x.value}{A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.}
 
-\item{y.value:}{A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.}
+\item{y.value}{A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.}
 
-\item{value.name:}{A character value providing the name of the column of the values.}
+\item{value.name}{A character value providing the name of the column of the values.}
 }
 \description{
 sim.t2.test

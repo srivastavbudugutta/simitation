@@ -19,17 +19,17 @@ analyze.simstudy.logistic(
 coefficients from repeated logistic regression models. It should be structured like the output
 of \code{simitation::sim.statistics.logistic$the.coefs()}.}
 
-\item{summary.stats:}{A data.frame or data.table object of the summary statistics of repeated logistic regression models.  Structure is in the form returned by the function simitation::sim.statistics.logistic$summary.stats().}
+\item{summary.stats}{A data.frame or data.table object of the summary statistics of repeated logistic regression models.  Structure is in the form returned by the function simitation::sim.statistics.logistic$summary.stats().}
 
-\item{conf.level:}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
+\item{conf.level}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{coef.name:}{A character value specifying the column of the.coefs that contains the names of the input variables of the logistic regression model.}
+\item{coef.name}{A character value specifying the column of the.coefs that contains the names of the input variables of the logistic regression model.}
 
-\item{estimate.name:}{A character value specifying the column of the.coefs that contains the estimated coefficients of the logistic regression model.}
+\item{estimate.name}{A character value specifying the column of the.coefs that contains the estimated coefficients of the logistic regression model.}
 
-\item{logistic.p.name:}{A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.}
+\item{logistic.p.name}{A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.}
 }
 \value{
 A list with several summary statistics for the logistic regression model.

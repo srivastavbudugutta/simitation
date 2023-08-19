@@ -13,15 +13,15 @@ sim.chisq.test.gf(
 )
 }
 \arguments{
-\item{simdat.chisq.gf:}{Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().}
+\item{simdat.chisq.gf}{Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().}
 
-\item{hypothesized.probs:}{A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".}
+\item{hypothesized.probs}{A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".}
 
-\item{correct:}{See help(chisq.test).}
+\item{correct}{See help(chisq.test).}
 
-\item{experiment.name:}{A character value providing the name of the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name of the column identifying the experiment.}
 
-\item{value.name:}{A character value providing the name of the column identifying the values.}
+\item{value.name}{A character value providing the name of the column identifying the values.}
 }
 \description{
 sim.chisq.test

@@ -15,19 +15,19 @@ simulation.steps(
 )
 }
 \arguments{
-\item{the.steps:}{A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:}
+\item{the.steps}{A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:}
 
-\item{n:}{A numeric value for the number of observations in each experiment.}
+\item{n}{A numeric value for the number of observations in each experiment.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{step.split:}{A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.}
+\item{step.split}{A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simulation.steps

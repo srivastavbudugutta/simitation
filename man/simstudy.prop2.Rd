@@ -25,39 +25,39 @@ simstudy.prop2(
 )
 }
 \arguments{
-\item{nx:}{A numeric value for the number of observations in the x group for each experiment.}
+\item{nx}{A numeric value for the number of observations in the x group for each experiment.}
 
-\item{ny:}{A numeric value for the number of observations in the y group for each experiment.}
+\item{ny}{A numeric value for the number of observations in the y group for each experiment.}
 
-\item{px:}{A numeric value for the probability of success in the x group.}
+\item{px}{A numeric value for the probability of success in the x group.}
 
-\item{py:}{A numeric value for the probability of success in the y group.}
+\item{py}{A numeric value for the probability of success in the y group.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{p:}{See help(prop.test).}
+\item{p}{See help(prop.test).}
 
-\item{alternative:}{See help(prop.test).}
+\item{alternative}{See help(prop.test).}
 
-\item{conf.level:}{See help(prop.test).}
+\item{conf.level}{See help(prop.test).}
 
-\item{correct:}{See help(prop.test).}
+\item{correct}{See help(prop.test).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{x.value:}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
+\item{x.value}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
 
-\item{y.value:}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
+\item{y.value}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
 
-\item{value.name:}{A character value specifying the name of the column that contains the value of the simulated data.}
+\item{value.name}{A character value specifying the name of the column that contains the value of the simulated data.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simstudy.prop2

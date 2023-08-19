@@ -16,21 +16,21 @@ sim.t.test(
 )
 }
 \arguments{
-\item{simdat.t:}{Data for use in one-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t().}
+\item{simdat.t}{Data for use in one-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t().}
 
-\item{alternative:}{See help(t.test).}
+\item{alternative}{See help(t.test).}
 
-\item{mu:}{See help(t.test)}
+\item{mu}{See help(t.test)}
 
-\item{paired:}{See help(t.test)}
+\item{paired}{See help(t.test)}
 
-\item{var.equal:}{See help(t.test)}
+\item{var.equal}{See help(t.test)}
 
-\item{conf.level:}{See help(t.test)}
+\item{conf.level}{See help(t.test)}
 
-\item{experiment.name:}{A character value providing the name of the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name of the column identifying the experiment.}
 
-\item{value.name:}{A character value providing the name of the column identifying the values.}
+\item{value.name}{A character value providing the name of the column identifying the values.}
 }
 \description{
 sim.t.test

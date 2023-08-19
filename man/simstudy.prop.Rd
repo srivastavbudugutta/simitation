@@ -20,29 +20,29 @@ simstudy.prop(
 )
 }
 \arguments{
-\item{n:}{A numeric value for the number of observations in each experiment.}
+\item{n}{A numeric value for the number of observations in each experiment.}
 
-\item{p:}{A numeric value for the actual probability of success.}
+\item{p.actual}{A numeric value for the actual probability of success.}
 
-\item{p.hypothesized:}{A numeric value for the hypothesized probability of success.}
+\item{p.hypothesized}{A numeric value for the hypothesized probability of success.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{alternative:}{See help(prop.test).}
+\item{alternative}{See help(prop.test).}
 
-\item{conf.level:}{See help(prop.test).}
+\item{conf.level}{See help(prop.test).}
 
-\item{correct:}{See help(prop.test).}
+\item{correct}{See help(prop.test).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{value.name:}{A character value providing the name for the simulated values.}
+\item{value.name}{A character value providing the name for the simulated values.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simstudy.prop

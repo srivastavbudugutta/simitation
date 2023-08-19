@@ -15,7 +15,13 @@ internal.prop.test(
 \arguments{
 \item{x}{A binary variable.}
 
-\item{...}{Other parameters passed to prop.test function.}
+\item{p}{Null hypothesis value for proportion. Default is NULL.}
+
+\item{alternative}{A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.}
+
+\item{conf.level}{A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the proportion. Default is 0.95.}
+
+\item{correct}{A logical indicating if Yates' continuity correction should be applied for the test. Default is TRUE.}
 }
 \value{
 A data frame with test results.

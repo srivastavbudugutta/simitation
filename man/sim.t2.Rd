@@ -22,33 +22,33 @@ sim.t2(
 )
 }
 \arguments{
-\item{nx:}{A numeric value for the number of observations in the x group for each experiment.}
+\item{nx}{A numeric value for the number of observations in the x group for each experiment.}
 
-\item{ny:}{A numeric value for the number of observations in the y group for each experiment.}
+\item{ny}{A numeric value for the number of observations in the y group for each experiment.}
 
-\item{meanx:}{A numeric value for the expected value of the x group used in the simulation.}
+\item{meanx}{A numeric value for the expected value of the x group used in the simulation.}
 
-\item{meany:}{A numeric value for the expected value of the y group used in the simulation.}
+\item{meany}{A numeric value for the expected value of the y group used in the simulation.}
 
-\item{sdx:}{A numeric value for the standard deviation of the x group used in the simulation.}
+\item{sdx}{A numeric value for the standard deviation of the x group used in the simulation.}
 
-\item{sdy:}{A numeric value for the standard deviation of the y group used in the simulation.}
+\item{sdy}{A numeric value for the standard deviation of the y group used in the simulation.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{x.value:}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
+\item{x.value}{A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).}
 
-\item{y.value:}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
+\item{y.value}{A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).}
 
-\item{value.name:}{A character value specifying the name of the column that contains the value of the simulated data.}
+\item{value.name}{A character value specifying the name of the column that contains the value of the simulated data.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 sim.t2

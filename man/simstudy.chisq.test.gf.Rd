@@ -20,27 +20,29 @@ simstudy.chisq.test.gf(
 )
 }
 \arguments{
-\item{n:}{A numeric value for the number of observations in each experiment.}
+\item{n}{A numeric value for the number of observations in each experiment.}
 
-\item{values:}{A vector of values specifying the sample space.}
+\item{values}{A vector of values specifying the sample space.}
 
-\item{actual.probs:}{A vector of hypothesized probabilities for the values.}
+\item{actual.probs}{A vector of probabilities used to simulate the values.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{hypothesized.probs}{A vector of hypothesized probabilities for the values.}
 
-\item{conf.level:}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{correct:}{See help(chisq.test).}
+\item{conf.level}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
+\item{correct}{See help(chisq.test).}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{value.name:}{A character value providing the name for the simulated values.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{value.name}{A character value providing the name for the simulated values.}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simstudy.chisq.test.gf

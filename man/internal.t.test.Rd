@@ -16,7 +16,15 @@ internal.t.test(
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{...}{Other parameters passed to t.test function.}
+\item{alternative}{A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.}
+
+\item{mu}{A number indicating the true value of the mean (or difference in means if you are performing a two-sample test). Default is 0.}
+
+\item{paired}{A logical indicating whether you want a paired t-test. Default is FALSE.}
+
+\item{var.equal}{A logical variable indicating whether to treat the two variances as being equal. If TRUE then the pooled variance is used to estimate the variance otherwise the Welch (or Satterthwaite) approximation to the degrees of freedom is used. Default is FALSE.}
+
+\item{conf.level}{A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the mean. Default is 0.95.}
 }
 \value{
 A data frame with test results.

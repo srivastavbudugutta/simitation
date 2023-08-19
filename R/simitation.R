@@ -142,12 +142,12 @@ analyze.simstudy.lm <- function(the.coefs, summary.stats, conf.level = 0.95, the
 #' @param the.coefs A data frame or data.table containing the summary table of estimated
 #' coefficients from repeated logistic regression models. It should be structured like the output
 #' of \code{simitation::sim.statistics.logistic$the.coefs()}.
-#' @param  summary.stats:  A data.frame or data.table object of the summary statistics of repeated logistic regression models.  Structure is in the form returned by the function simitation::sim.statistics.logistic$summary.stats().
-#' @param conf.level:  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
-#' @param  coef.name:  A character value specifying the column of the.coefs that contains the names of the input variables of the logistic regression model.
-#' @param estimate.name:  A character value specifying the column of the.coefs that contains the estimated coefficients of the logistic regression model.
-#' @param logistic.p.name:  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.
+#' @param  summary.stats  A data.frame or data.table object of the summary statistics of repeated logistic regression models.  Structure is in the form returned by the function simitation::sim.statistics.logistic$summary.stats().
+#' @param conf.level  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  coef.name  A character value specifying the column of the.coefs that contains the names of the input variables of the logistic regression model.
+#' @param estimate.name  A character value specifying the column of the.coefs that contains the estimated coefficients of the logistic regression model.
+#' @param logistic.p.name  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.
 #' @return A list with several summary statistics for the logistic regression model.
 #' @export
 #'
@@ -259,13 +259,13 @@ analyze.simstudy.prop <- function(test.statistics.prop, alternative = c("two.sid
 #'
 #' @description analyze.simstudy.prop2
 
-#' @param test.statistics.prop2:  Summary information for fitting two-sample tests of proportions.  Structure is in the form returned by the function simitation::sim.prop2.test().
+#' @param test.statistics.prop2  Summary information for fitting two-sample tests of proportions.  Structure is in the form returned by the function simitation::sim.prop2.test().
 
-#' @param  alternative:  See help(prop.test).
+#' @param  alternative  See help(prop.test).
 
-#' @param  conf.level:  See help(prop.test).
+#' @param  conf.level  See help(prop.test).
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 #'
 #' @export
 
@@ -326,13 +326,13 @@ analyze.simstudy.prop2 <- function(test.statistics.prop2, alternative = c("two.s
 
 #' @description analyze.simstudy.t
 
-#' @param test.statistics.t:  Summary information for fitting one-sample t tests.  Structure is in the form returned by the function simitation::sim.t.test().
+#' @param test.statistics.t  Summary information for fitting one-sample t tests.  Structure is in the form returned by the function simitation::sim.t.test().
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative  See help(t.test).
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level  See help(t.test)
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 #'
 #' @export
 
@@ -389,13 +389,13 @@ analyze.simstudy.t <- function(test.statistics.t, alternative = c("two.sided", "
 
 #' @description analyze.simstudy.t2
 
-#' @param  test.statistics.t2:  Summary information for fitting two-sample t tests.  Structure is in the form returned by the function simitation::sim.t2.test().
+#' @param  test.statistics.t2  Summary information for fitting two-sample t tests.  Structure is in the form returned by the function simitation::sim.t2.test().
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative  See help(t.test).
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level  See help(t.test)
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 #'
 #' @export
 
@@ -454,21 +454,21 @@ analyze.simstudy.t2 <- function(test.statistics.t2, alternative = c("two.sided",
 #'
 #' @description sim.chisq.gf
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param values:  A vector of values specifying the sample space.
+#' @param values  A vector of values specifying the sample space.
 
-#' @param  prob:  A vector of probabilities used to simulate the values.
+#' @param  prob  A vector of probabilities used to simulate the values.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  value.name:  A character value providing the name for the simulated values.
+#' @param  value.name  A character value providing the name for the simulated values.
 
-#' @param seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -511,25 +511,25 @@ sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1, experiment
 #' @description sim.chisq.ind
 
 
-#' @param n:  A vector of sample sizes for the different groups.
+#' @param n A vector of sample sizes for the different groups.
 
-#' @param values:  A vector of values specifying the sample space.
+#' @param values A vector of values specifying the sample space.
 
-#' @param  probs:  A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.
+#' @param  probs A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param group.name:  A character value providing the name of the column of the group labels.
+#' @param group.name A character value providing the name of the column of the group labels.
 
-#' @param  group.values:  A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.
+#' @param  group.values A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.
 
-#' @param value.name:  A character value providing the name for the simulated values.
+#' @param value.name A character value providing the name for the simulated values.
 
-#' @param seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 
 #' @export
 #'
@@ -586,15 +586,15 @@ sim.chisq.ind <- function(n, values, probs, num.experiments = 2, experiment.name
 #'
 #' @description sim.chisq.test
 
-#' @param  simdat.chisq.gf:  Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().
+#' @param  simdat.chisq.gf Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().
 
-#' @param hypothesized.probs:  A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".
+#' @param hypothesized.probs A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".
 
-#' @param correct:  See help(chisq.test).
+#' @param correct See help(chisq.test).
 
-#' @param experiment.name:  A character value providing the name of the column identifying the experiment.
+#' @param experiment.name A character value providing the name of the column identifying the experiment.
 
-#' @param  value.name:  A character value providing the name of the column identifying the values.
+#' @param  value.name A character value providing the name of the column identifying the values.
 #'
 #' @export
 
@@ -621,15 +621,15 @@ sim.chisq.test.gf <- function(simdat.chisq.gf, hypothesized.probs = NULL, correc
 #'
 #' @description sim.chisq.test.ind
 
-#' @param simdat.chisq.ind:  Data for use in chi squared tests of independence across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.ind().
+#' @param simdat.chisq.ind Data for use in chi squared tests of independence across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.ind().
 
-#' @param correct:  See help(chisq.test).
+#' @param correct See help(chisq.test).
 
-#' @param experiment.name:  A character value providing the name of the column identifying the experiment.
+#' @param experiment.name A character value providing the name of the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param  value.name:  A character value providing the name of the column identifying the values.
+#' @param  value.name A character value providing the name of the column identifying the values.
 #'
 #' @export
 
@@ -656,19 +656,19 @@ sim.chisq.test.ind <- function(simdat.chisq.ind, correct = T, experiment.name = 
 #'
 #' @description sim.prop
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n A numeric value for the number of observations in each experiment.
 
-#' @param  p:  A numeric value for the probability of success.
+#' @param  p A numeric value for the probability of success.
 
-#' @param num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param value.name:  A character value providing the name for the simulated values.
+#' @param value.name A character value providing the name for the simulated values.
 
-#' @param seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -702,19 +702,19 @@ sim.prop <- function(n, p = 0.5, num.experiments = 1, experiment.name = "experim
 #' @description sim.prop.test
 
 
-#' @param simdat.prop:  Data for use in one-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop().
+#' @param simdat.prop Data for use in one-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop().
 
-#' @param p:  See help(prop.test).
+#' @param p See help(prop.test).
 
-#' @param alternative:  See help(prop.test).
+#' @param alternative See help(prop.test).
 
-#' @param conf.level:  See help(prop.test).
+#' @param conf.level See help(prop.test).
 
-#' @param correct:  See help(prop.test).
+#' @param correct See help(prop.test).
 
-#' @param experiment.name:  A character value providing the name of the column identifying the experiment.
+#' @param experiment.name A character value providing the name of the column identifying the experiment.
 
-#' @param value.name:  A character value providing the name of the column identifying the values.
+#' @param value.name A character value providing the name of the column identifying the values.
 #'
 #' @export
 
@@ -740,25 +740,25 @@ sim.prop.test <- function(simdat.prop, p = NULL, alternative = c("two.sided", "l
 #'
 #' @description sim.prop2.test
 
-#' @param simdat.prop2:  Data for use in two-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop2().
+#' @param simdat.prop2 Data for use in two-sample proportions tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.prop2().
 
-#' @param p:  See help(prop.test).
+#' @param p See help(prop.test).
 
-#' @param alternative:  See help(prop.test).
+#' @param alternative See help(prop.test).
 
-#' @param conf.level:  See help(prop.test).
+#' @param conf.level See help(prop.test).
 
-#' @param correct:  See help(prop.test).
+#' @param correct See help(prop.test).
 
-#' @param experiment.name:  A character value providing the name of the column identifying the experiment.
+#' @param experiment.name A character value providing the name of the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param  x.value:  A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.
+#' @param  x.value A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.
 
-#' @param y.value:  A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.
+#' @param y.value A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.
 
-#' @param value.name:  A character value providing the name of the column identifying the values.
+#' @param value.name A character value providing the name of the column identifying the values.
 #'
 #' @export
 
@@ -785,11 +785,11 @@ sim.prop2.test <- function(simdat.prop2, p = NULL,  alternative = c("two.sided",
 
 #' @description sim.statistic.lm
 #'
-#' @param simdat:  Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().
+#' @param simdat Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().
 
-#' @param the.formula:  A formula object or character value specifying the formula for the regression model.
+#' @param the.formula A formula object or character value specifying the formula for the regression model.
 
-#' @param grouping.variables:  A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.
+#' @param grouping.variables A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.
 #'
 #' @export
 
@@ -818,11 +818,11 @@ sim.statistics.lm <- function(simdat, the.formula, grouping.variables){
 
 #' @description sim.statistics.lm
 
-#' @param simdat:  Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().
+#' @param simdat Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().
 
-#' @param the.formula:  A formula object or character value specifying the formula for the regression model.
+#' @param the.formula A formula object or character value specifying the formula for the regression model.
 
-#' @param grouping.variables:  A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.
+#' @param grouping.variables A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.
 #'
 #' @export
 
@@ -851,21 +851,21 @@ sim.statistics.logistic <- function(simdat, the.formula, grouping.variables){
 
 #' @description sim.t
 
-#' @param n:  A numeric value for the number of observations in each experiment.
+#' @param n A numeric value for the number of observations in each experiment.
 
-#' @param mean:  A numeric value for the expected value of the data to be simulated.
+#' @param mean A numeric value for the expected value of the data to be simulated.
 
-#' @param sd:  A numeric value for the standard deviation of the data to be simulated.
+#' @param sd A numeric value for the standard deviation of the data to be simulated.
 
-#' @param num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param value.name:  A character value providing the name for the simulated values.
+#' @param value.name A character value providing the name for the simulated values.
 
-#' @param seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -883,29 +883,29 @@ sim.t <- function(n, mean = 0, sd = 1, num.experiments = 1, experiment.name = "e
 #'
 #' @description sim.prop2
 
-#' @param  nx:  A numeric value for the number of observations in the x group for each experiment.
+#' @param  nx A numeric value for the number of observations in the x group for each experiment.
 
-#' @param  ny:  A numeric value for the number of observations in the y group for each experiment.
+#' @param  ny A numeric value for the number of observations in the y group for each experiment.
 
-#' @param  px:  A numeric value for the probability of success in the x group.
+#' @param  px A numeric value for the probability of success in the x group.
 
-#' @param  py:  A numeric value for the probability of success in the y group.
+#' @param  py A numeric value for the probability of success in the y group.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param  x.value:  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
+#' @param  x.value A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
 
-#' @param  y.value:  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
+#' @param  y.value A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
 
-#' @param  value.name:  A character value specifying the name of the column that contains the value of the simulated data.
+#' @param  value.name A character value specifying the name of the column that contains the value of the simulated data.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -952,21 +952,21 @@ sim.prop2 <- function(nx, ny, px = 0.5, py = 0.5, num.experiments = 1, experimen
 #' @description sim.t.test
 #' @import data.table
 #'
-#' @param  simdat.t:  Data for use in one-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t().
+#' @param  simdat.t Data for use in one-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t().
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative See help(t.test).
 
-#' @param  mu:  See help(t.test)
+#' @param  mu See help(t.test)
 
-#' @param  paired:  See help(t.test)
+#' @param  paired See help(t.test)
 
-#' @param  var.equal:  See help(t.test)
+#' @param  var.equal See help(t.test)
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level See help(t.test)
 
-#' @param  experiment.name:  A character value providing the name of the column identifying the experiment.
+#' @param  experiment.name A character value providing the name of the column identifying the experiment.
 
-#' @param  value.name:  A character value providing the name of the column identifying the values.
+#' @param  value.name A character value providing the name of the column identifying the values.
 #'
 #' @export
 
@@ -993,33 +993,33 @@ sim.t.test <- function(simdat.t, alternative = c("two.sided", "less", "greater")
 #'
 #' @description sim.t2
 
-#' @param  nx:  A numeric value for the number of observations in the x group for each experiment.
+#' @param  nx A numeric value for the number of observations in the x group for each experiment.
 
-#' @param  ny:  A numeric value for the number of observations in the y group for each experiment.
+#' @param  ny A numeric value for the number of observations in the y group for each experiment.
 
-#' @param  meanx:  A numeric value for the expected value of the x group used in the simulation.
+#' @param  meanx A numeric value for the expected value of the x group used in the simulation.
 
-#' @param  meany:  A numeric value for the expected value of the y group used in the simulation.
+#' @param  meany A numeric value for the expected value of the y group used in the simulation.
 
-#' @param  sdx:  A numeric value for the standard deviation of the x group used in the simulation.
+#' @param  sdx A numeric value for the standard deviation of the x group used in the simulation.
 
-#' @param  sdy:  A numeric value for the standard deviation of the y group used in the simulation.
+#' @param  sdy A numeric value for the standard deviation of the y group used in the simulation.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param  x.value:  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
+#' @param  x.value A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
 
-#' @param  y.value:  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
+#' @param  y.value A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
 
-#' @param  value.name:  A character value specifying the name of the column that contains the value of the simulated data.
+#' @param  value.name A character value specifying the name of the column that contains the value of the simulated data.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1038,27 +1038,27 @@ sim.t2 <- function(nx, ny, meanx = 0, meany = 1, sdx = 1, sdy = 1, num.experimen
 #'
 #' @description sim.t2.test
 
-#' @param  simdat.t2:  Data for use in two-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t2().
+#' @param  simdat.t2 Data for use in two-sample t tests across one or more experiments.  Structure is in the form returned by the function simitation::sim.t2().
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative See help(t.test).
 
-#' @param  mu:  See help(t.test)
+#' @param  mu See help(t.test)
 
-#' @param  paired:  See help(t.test)
+#' @param  paired See help(t.test)
 
-#' @param  var.equal:  See help(t.test)
+#' @param  var.equal See help(t.test)
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level See help(t.test)
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param  x.value:  A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.
+#' @param  x.value A character value providing a label for the first group in the two-sample t test in the column of data named by group.name.
 
-#' @param  y.value:  A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.
+#' @param  y.value A character value providing a label for the second group in the two-sample t test in the column of data named by group.name.
 
-#' @param  value.name:  A character value providing the name of the column of the values.
+#' @param  value.name A character value providing the name of the column of the values.
 #'
 #' @export
 
@@ -1084,32 +1084,19 @@ sim.t2.test <- function(simdat.t2, alternative = c("two.sided", "less", "greater
 #' simstudy.chisq.test.gf
 #'
 #' @description simstudy.chisq.test.gf
-
-
-#' @param  n:  A numeric value for the number of observations in each experiment.
-
-#' @param  values:  A vector of values specifying the sample space.
-
-#' @param  actual.probs:  A vector of probabilities used to simulate the values.
-
-#' @param  actual.probs:  A vector of hypothesized probabilities for the values.
-
-#' @param num.experiments:  A numeric value representing the number of simulated experiments.
-
-#' @param conf.level:  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
-
-#' @param  correct:  See help(chisq.test).
-
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
-
-#' @param experiment.name:  A character value providing the name for the column identifying the experiment.
-
-#' @param  value.name:  A character value providing the name for the simulated values.
-
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
-
-#' @param vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
+#' @param  n A numeric value for the number of observations in each experiment.
+#' @param  values A vector of values specifying the sample space.
+#' @param  actual.probs A vector of probabilities used to simulate the values.
+#' @param  hypothesized.probs A vector of hypothesized probabilities for the values.
+#' @param num.experiments A numeric value representing the number of simulated experiments.
+#' @param conf.level A numeric value between 0 and 1 representing the confidence level (1 - significance level).
+#' @param  correct See help(chisq.test).
+#' @param  the.quantiles A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param experiment.name A character value providing the name for the column identifying the experiment.
+#' @param  value.name A character value providing the name for the simulated values.
+#' @param  seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #' @export
 
 simstudy.chisq.test.gf <- function(n, values, actual.probs, hypothesized.probs = NULL, num.experiments = 1, conf.level = 0.95, correct = T, the.quantiles = c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975), experiment.name = "experiment", value.name = "x", seed = 7261, vstr = 3.6){
@@ -1129,31 +1116,31 @@ simstudy.chisq.test.gf <- function(n, values, actual.probs, hypothesized.probs =
 
 #' @description simstudy.chisq.test.ind
 
-#' @param n:  A vector of sample sizes for the different groups.
+#' @param n A vector of sample sizes for the different groups.
 
-#' @param  values:  A vector of values specifying the sample space.
+#' @param  values A vector of values specifying the sample space.
 
-#' @param  probs:  A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.
+#' @param  probs A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.
 
-#' @param num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param num.experiments A numeric value representing the number of simulated experiments.
 
-#' @param conf.level:  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
+#' @param conf.level A numeric value between 0 and 1 representing the confidence level (1 - significance level).
 
-#' @param  correct:  See help(chisq.test).
+#' @param  correct See help(chisq.test).
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param experiment.name A character value providing the name for the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name A character value providing the name of the column of the group labels.
 
-#' @param group.values:  A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.
+#' @param group.values A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.
 
-#' @param  value.name:  A character value providing the name for the simulated values.
+#' @param  value.name A character value providing the name for the simulated values.
 
-#' @param seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param seed A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1173,49 +1160,49 @@ simstudy.chisq.test.ind <- function(n, values, probs, num.experiments = 1, conf.
 
 #' @description simstudy.lm
 
-#' @param  the.steps:  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
+#' @param  the.steps A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
 
-#' @param Normal:  "X ~ N(100, 5)" with the mean and SD.
+#' Normal "X ~ N(100, 5)" with the mean and SD.
 
-#' @param Uniform:  "X ~ U(0, 100)" with the minimum and maximum.
+#' Uniform "X ~ U(0, 100)" with the minimum and maximum.
 
-#' @param Poisson:  "X ~ Poisson(3)" with the mean.
+#' Poisson "X ~ Poisson(3)" with the mean.
 
-#' @param Binary:  "X ~ Binary(0.5)" with the probability of success.
+#' Binary "X ~ Binary(0.5)" with the probability of success.
 
-#' @param Binomial:  "X ~ Bin(10, 0.2)" with the number of trials and probability of success.
+#' Binomial "X ~ Bin(10, 0.2)" with the number of trials and probability of success.
 
-#' @param Categorical:  "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.
+#' Categorical "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.
 
-#' @param  Regression:  "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
+#' Regression "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
 
-#' @param Linear Regression:  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.
+#' Linear Regression  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  the.formula:  A formula object or character value specifying the formula for the regression model.
+#' @param  the.formula  A formula object or character value specifying the formula for the regression model.
 
-#' @param  conf.level:  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
+#' @param  conf.level  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  step.split:  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
+#' @param  step.split  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
 
-#' @param  coef.name:  A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.
+#' @param  coef.name  A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.
 
-#' @param  estimate.name:  A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.
+#' @param  estimate.name  A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.
 
-#' @param  lm.p.name:  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the linear regression model.
+#' @param  lm.p.name  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the linear regression model.
 
-#' @param  f.p.name:  A character value specifying the column of summary.stats that contains the p-value for the linear regression model's F test.
+#' @param  f.p.name  A character value specifying the column of summary.stats that contains the p-value for the linear regression model's F test.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1237,47 +1224,46 @@ simstudy.lm <- function(the.steps, n, num.experiments, the.formula, conf.level =
 #'
 #' @description simstudy.logistic
 
-#' @param  the.steps:  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
+#' @param  the.steps  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
+#' Normal  "X ~ N(100, 5)" with the mean and SD.
 
-#' @param Normal:  "X ~ N(100, 5)" with the mean and SD.
+#' Uniform  "X ~ U(0, 100)" with the minimum and maximum.
 
-#' @param Uniform  "X ~ U(0, 100)" with the minimum and maximum.
+#' Poisson  "X ~ Poisson(3)" with the mean.
 
-#' @param Poisson:  "X ~ Poisson(3)" with the mean.
+#' Binary  "X ~ Binary(0.5)" with the probability of success.
 
-#' @param Binary:  "X ~ Binary(0.5)" with the probability of success.
+#' Binomial  "X ~ Bin(10, 0.2)" with the number of trials and probability of success.
 
-#' @param Binomial:  "X ~ Bin(10, 0.2)" with the number of trials and probability of success.
+#' Categorical  "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.
 
-#' @param Categorical:  "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.
+#' Logistic Regression  "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
 
-#' @param Logistic Regression:  "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
+#' Linear Regression  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.
 
-#' @param Linear Regression:  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  the.formula  A formula object or character value specifying the formula for the regression model.
 
-#' @param  the.formula:  A formula object or character value specifying the formula for the regression model.
+#' @param  conf.level  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
 
-#' @param  conf.level:  A numeric value between 0 and 1 representing the confidence level (1 - significance level).
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  step.split  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
 
-#' @param  step.split:  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
+#' @param  coef.name  A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.
 
-#' @param  coef.name:  A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.
+#' @param  estimate.name  A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.
 
-#' @param  estimate.name:  A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.
+#' @param  logistic.p.name  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.
 
-#' @param  logistic.p.name:  A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the logistic regression model.
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
-
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1299,29 +1285,29 @@ simstudy.logistic <- function(the.steps, n, num.experiments, the.formula, conf.l
 
 #' @description simstudy.prop
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param  p:  A numeric value for the actual probability of success.
+#' @param  p.actual A numeric value for the actual probability of success.
 
-#' @param  p.hypothesized:  A numeric value for the hypothesized probability of success.
+#' @param  p.hypothesized  A numeric value for the hypothesized probability of success.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  alternative:  See help(prop.test).
+#' @param  alternative  See help(prop.test).
 
-#' @param  conf.level:  See help(prop.test).
+#' @param  conf.level  See help(prop.test).
 
-#' @param  correct:  See help(prop.test).
+#' @param  correct  See help(prop.test).
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  value.name:  A character value providing the name for the simulated values.
+#' @param  value.name  A character value providing the name for the simulated values.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1354,39 +1340,39 @@ simstudy.prop <- function(n, p.actual = 0.5, p.hypothesized = 0.5, num.experimen
 #'
 #' @description simstudy.prop2
 
-#' @param  nx:  A numeric value for the number of observations in the x group for each experiment.
+#' @param  nx  A numeric value for the number of observations in the x group for each experiment.
 
-#' @param  ny:  A numeric value for the number of observations in the y group for each experiment.
+#' @param  ny  A numeric value for the number of observations in the y group for each experiment.
 
-#' @param  px:  A numeric value for the probability of success in the x group.
+#' @param  px  A numeric value for the probability of success in the x group.
 
-#' @param  py:  A numeric value for the probability of success in the y group.
+#' @param  py  A numeric value for the probability of success in the y group.
 
-#' @param num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param p:  See help(prop.test).
+#' @param p  See help(prop.test).
 
-#' @param alternative:  See help(prop.test).
+#' @param alternative  See help(prop.test).
 
-#' @param conf.level:  See help(prop.test).
+#' @param conf.level  See help(prop.test).
 
-#' @param correct:  See help(prop.test).
+#' @param correct  See help(prop.test).
 
-#' @param the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param group.name:  A character value providing the name of the column of the group labels.
+#' @param group.name  A character value providing the name of the column of the group labels.
 
-#' @param x.value:  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
+#' @param x.value  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
 
-#' @param  y.value:  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
+#' @param  y.value  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
 
-#' @param  value.name:  A character value specifying the name of the column that contains the value of the simulated data.
+#' @param  value.name  A character value specifying the name of the column that contains the value of the simulated data.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1419,29 +1405,29 @@ simstudy.prop2 <- function(nx, ny, px, py, num.experiments, p = NULL,  alternati
 #'
 #' @description simstudy.t
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param  mean:  A numeric value for the expected value of the data to be simulated.
+#' @param  mean  A numeric value for the expected value of the data to be simulated.
 
-#' @param  sd:  A numeric value for the standard deviation of the data to be simulated.
+#' @param  sd  A numeric value for the standard deviation of the data to be simulated.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative  See help(t.test).
 
-#' @param  mu:  See help(t.test)
+#' @param  mu  See help(t.test)
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level  See help(t.test)
 
-#' @param  value.name:  A character value providing the name for the simulated values.
+#' @param  value.name  A character value providing the name for the simulated values.
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1471,41 +1457,42 @@ simstudy.t <- function(n, mean = 0, sd = 1, num.experiments = 1, alternative = c
 #'
 #' @description simstudy.t2
 #'
-#' @param  nx:  A numeric value for the number of observations in the x group for each experiment.
+#' @param  nx  A numeric value for the number of observations in the x group for each experiment.
 
-#' @param  ny:  A numeric value for the number of observations in the y group for each experiment.
+#' @param  ny  A numeric value for the number of observations in the y group for each experiment.
 
-#' @param  meanx:  A numeric value for the expected value of the x group used in the simulation.
+#' @param  meanx  A numeric value for the expected value of the x group used in the simulation.
 
-#' @param  meany:  A numeric value for the expected value of the y group used in the simulation.
+#' @param  meany  A numeric value for the expected value of the y group used in the simulation.
 
-#' @param  sdx:  A numeric value for the standard deviation of the x group used in the simulation.
+#' @param  sdx  A numeric value for the standard deviation of the x group used in the simulation.
 
-#' @param  sdy:  A numeric value for the standard deviation of the y group used in the simulation.
+#' @param  sdy  A numeric value for the standard deviation of the y group used in the simulation.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
-#' @param  alternative:  See help(t.test).
+#' @param  alternative  See help(t.test).
 
-#' @param  mu:  See help(t.test)
+#' @param  mu  See help(t.test)
 
-#' @param  conf.level:  See help(t.test)
+#' @param  conf.level  See help(t.test)
 
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  group.name:  A character value providing the name of the column of the group labels.
+#' @param  group.name  A character value providing the name of the column of the group labels.
 
-#' @param  x.value:  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
+#' @param  x.value  A character value specifying the label used for data in the x group (in the column labled by the group.name parameter).
 
-#' @param  y.value:  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
+#' @param  y.value  A character value specifying the label used for data in the y group (in the column labled by the group.name parameter).
 
-#' @param  value.name:  A character value specifying the name of the column that contains the value of the simulated data.
+#' @param  value.name  A character value specifying the name of the column that contains the value of the simulated data.
 
-#' @param  the.quantiles:  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
+#' @param  the.quantiles  A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  var.equal A logical indicating whether to treat the two variances as being equal. If TRUE, then a pooled variance is used to estimate the variance, otherwise the variances are estimated separately. See help(t.test).
 #'
 #' @export
 
@@ -1537,7 +1524,7 @@ simstudy.t2 <- function(nx, ny, meanx = 0, meany = 1, sdx = 1, sdy = 1, num.expe
 #' @description simulation.steps
 
 
-#' @param  the.steps:  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
+#' @param  the.steps  A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
 
 ## Normal:  "X ~ N(100, 5)" with the mean and SD.
 
@@ -1555,18 +1542,18 @@ simstudy.t2 <- function(nx, ny, meanx = 0, meany = 1, sdx = 1, sdy = 1, num.expe
 
 ## Linear Regression:  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.
 
-#' @param  n:  A numeric value for the number of observations in each experiment.
+#' @param  n  A numeric value for the number of observations in each experiment.
 
-#' @param  num.experiments:  A numeric value representing the number of simulated experiments.
+#' @param  num.experiments  A numeric value representing the number of simulated experiments.
 
 #'
-#' @param  experiment.name:  A character value providing the name for the column identifying the experiment.
+#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
 
-#' @param  step.split:  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
+#' @param  step.split  A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.
 
-#' @param  seed:  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
+#' @param  seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
 
-#' @param  vstr:  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
 #'
 #' @export
 
@@ -1605,7 +1592,11 @@ simulation.steps <- function(the.steps, n, num.experiments = 1, experiment.name 
 #' @description Computes the one-sample t-test for the given data.
 #'
 #' @param x A numeric vector.
-#' @param ... Other parameters passed to t.test function.
+#' @param alternative A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.
+#' @param mu A number indicating the true value of the mean (or difference in means if you are performing a two-sample test). Default is 0.
+#' @param paired A logical indicating whether you want a paired t-test. Default is FALSE.
+#' @param var.equal A logical variable indicating whether to treat the two variances as being equal. If TRUE then the pooled variance is used to estimate the variance otherwise the Welch (or Satterthwaite) approximation to the degrees of freedom is used. Default is FALSE.
+#' @param conf.level A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the mean. Default is 0.95.
 #' @return A data frame with test results.
 
 internal.t.test <- function(x, alternative = c("two.sided", "less", "greater"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95){
@@ -2162,7 +2153,10 @@ internal.chisq.test.ind <- function(the.data, group.name, value.name, correct = 
 #' @description Computes the test for proportion for the given binary data.
 #'
 #' @param x A binary variable.
-#' @param ... Other parameters passed to prop.test function.
+#' @param p Null hypothesis value for proportion. Default is NULL.
+#' @param alternative A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.
+#' @param conf.level A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the proportion. Default is 0.95.
+#' @param correct A logical indicating if Yates' continuity correction should be applied for the test. Default is TRUE.
 #' @return A data frame with test results.
 
 internal.prop.test <- function(x, p = NULL, alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE){
@@ -2181,7 +2175,11 @@ internal.prop.test <- function(x, p = NULL, alternative = c("two.sided", "less",
 #'
 #' @param x First binary variable.
 #' @param y Second binary variable.
-#' @param ... Other parameters passed to prop.test function.
+#' @param p Null hypothesis value for proportion. Default is NULL.
+#' @param alternative A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.
+#' @param conf.level A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the proportion. Default is 0.95.
+#' @param correct A logical indicating if Yates' continuity correction should be applied for the test. Default is TRUE.
+#' @param na.rm A logical indicating if NA values should be removed. Default is TRUE.
 #' @return A data frame with test results.
 
 internal.prop2.test <- function(x, y, p = NULL,  alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE, na.rm = T){
@@ -2344,7 +2342,11 @@ internal.statistics.one.logistic <- function(the.data, the.formula){
 #'
 #' @param x First numeric vector.
 #' @param y Second numeric vector.
-#' @param ... Other parameters passed to t.test function.
+#' @param alternative A character string specifying the alternative hypothesis. One of \code{"two.sided"}, \code{"less"}, or \code{"greater"}. Default is \code{"two.sided"}.
+#' @param mu A number indicating the true value of the mean difference (relevant if \code{paired = TRUE}). Default is 0.
+#' @param paired A logical indicating whether you want a paired t-test. Default is FALSE.
+#' @param var.equal A logical variable indicating whether to treat the two variances as being equal. If TRUE then the pooled variance is used to estimate the variance otherwise the Welch (or Satterthwaite) approximation to the degrees of freedom is used. Default is FALSE.
+#' @param conf.level A numeric value between 0 and 1 indicating the confidence level for the interval estimate of the mean difference. Default is 0.95.
 #' @return A data frame with test results.
 
 internal.t2.test <- function(x, y, alternative = c("two.sided", "less", "greater"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95){

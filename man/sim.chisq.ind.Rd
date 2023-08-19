@@ -18,25 +18,25 @@ sim.chisq.ind(
 )
 }
 \arguments{
-\item{n:}{A vector of sample sizes for the different groups.}
+\item{n}{A vector of sample sizes for the different groups.}
 
-\item{values:}{A vector of values specifying the sample space.}
+\item{values}{A vector of values specifying the sample space.}
 
-\item{probs:}{A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.}
+\item{probs}{A matrix of probabilities used to simulate the values in each group.  The rows of the probs matrix correspond to the groups, while the columns correspond to the values.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{group.values:}{A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.}
+\item{group.values}{A vector of unique values that identify the different groups, e.g. c("x", "y", "z").  If NULL, then values "x1", "x2", ..., "xk" will be assigned for the k groups specified.}
 
-\item{value.name:}{A character value providing the name for the simulated values.}
+\item{value.name}{A character value providing the name for the simulated values.}
 
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 sim.chisq.ind

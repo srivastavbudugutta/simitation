@@ -7,11 +7,11 @@
 sim.statistics.lm(simdat, the.formula, grouping.variables)
 }
 \arguments{
-\item{simdat:}{Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().}
+\item{simdat}{Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().}
 
-\item{the.formula:}{A formula object or character value specifying the formula for the regression model.}
+\item{the.formula}{A formula object or character value specifying the formula for the regression model.}
 
-\item{grouping.variables:}{A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.}
+\item{grouping.variables}{A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.}
 }
 \description{
 sim.statistic.lm

@@ -13,15 +13,15 @@ sim.chisq.test.ind(
 )
 }
 \arguments{
-\item{simdat.chisq.ind:}{Data for use in chi squared tests of independence across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.ind().}
+\item{simdat.chisq.ind}{Data for use in chi squared tests of independence across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.ind().}
 
-\item{correct:}{See help(chisq.test).}
+\item{correct}{See help(chisq.test).}
 
-\item{experiment.name:}{A character value providing the name of the column identifying the experiment.}
+\item{experiment.name}{A character value providing the name of the column identifying the experiment.}
 
-\item{group.name:}{A character value providing the name of the column of the group labels.}
+\item{group.name}{A character value providing the name of the column of the group labels.}
 
-\item{value.name:}{A character value providing the name of the column identifying the values.}
+\item{value.name}{A character value providing the name of the column identifying the values.}
 }
 \description{
 sim.chisq.test.ind

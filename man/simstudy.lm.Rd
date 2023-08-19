@@ -22,49 +22,41 @@ simstudy.lm(
 )
 }
 \arguments{
-\item{the.steps:}{A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:}
+\item{the.steps}{A character vector of variables to simulate.  The variables are simulated in the order specified.  Later variables can be generated to depend on earlier variables.  The possible specifications include:
+Normal "X ~ N(100, 5)" with the mean and SD.
+Uniform "X ~ U(0, 100)" with the minimum and maximum.
+Poisson "X ~ Poisson(3)" with the mean.
+Binary "X ~ Binary(0.5)" with the probability of success.
+Binomial "X ~ Bin(10, 0.2)" with the number of trials and probability of success.
+Categorical "Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.
+Regression "Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"
+Linear Regression  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.}
 
-\item{Normal:}{"X ~ N(100, 5)" with the mean and SD.}
+\item{n}{A numeric value for the number of observations in each experiment.}
 
-\item{Uniform:}{"X ~ U(0, 100)" with the minimum and maximum.}
+\item{num.experiments}{A numeric value representing the number of simulated experiments.}
 
-\item{Poisson:}{"X ~ Poisson(3)" with the mean.}
+\item{the.formula}{A formula object or character value specifying the formula for the regression model.}
 
-\item{Binary:}{"X ~ Binary(0.5)" with the probability of success.}
+\item{conf.level}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
 
-\item{Binomial:}{"X ~ Bin(10, 0.2)" with the number of trials and probability of success.}
+\item{the.quantiles}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
 
-\item{Categorical:}{"Diet ~ sample(('Light', 'Moderate', 'Heavy'), (0.2, 0.45, 0.35))" with the values in the first set of parentheses and their respective probabilities in the second.}
+\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
 
-\item{Regression:}{"Healthy.Lifestyle ~ logistic(log(0.45) - 0.1 * (Age -45) + 0.05 * Female + 0.01 * Health.Percentile + 0.5 * Exercise.Sessions - 0.1 * (Diet == 'Moderate') - 0.4 * (Diet == 'Heavy'))"}
+\item{step.split}{A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.}
 
-\item{Linear}{Regression:  "Weight ~ lm(150 - 15 * Female + 0.5 * Age - 0.1 * Health.Percentile - 0.2 * Exercise.Sessions  + 5 * (Diet == 'Moderate') + 15 * (Diet == 'Heavy') - 2 * Healthy.Lifestyle + N(0, 10))".  Note that the error term may be specified symbolically with any of the above distributions.}
+\item{coef.name}{A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.}
 
-\item{n:}{A numeric value for the number of observations in each experiment.}
+\item{estimate.name}{A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.}
 
-\item{num.experiments:}{A numeric value representing the number of simulated experiments.}
+\item{lm.p.name}{A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the linear regression model.}
 
-\item{the.formula:}{A formula object or character value specifying the formula for the regression model.}
+\item{f.p.name}{A character value specifying the column of summary.stats that contains the p-value for the linear regression model's F test.}
 
-\item{conf.level:}{A numeric value between 0 and 1 representing the confidence level (1 - significance level).}
+\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
 
-\item{the.quantiles:}{A numeric vector of values between 0 and 1.  Summary statistics to analyze the tests will return the specified quantiles.}
-
-\item{experiment.name:}{A character value providing the name for the column identifying the experiment.}
-
-\item{step.split:}{A character value that separates the name of the variable to be simulated (left side) from its distribution (right side).  Using the.steps = "X ~ N(0,1)" with step.split = "~" will generate a variable named X from a standard Normal distribution.}
-
-\item{coef.name:}{A character value specifying the column of the.coefs that contains the names of the input variables of the linear regression model.}
-
-\item{estimate.name:}{A character value specifying the column of the.coefs that contains the estimated coefficients of the linear regression model.}
-
-\item{lm.p.name:}{A character value specifying the column of the.coefs that contains the p-values for the tests of the estimated coefficients of the linear regression model.}
-
-\item{f.p.name:}{A character value specifying the column of summary.stats that contains the p-value for the linear regression model's F test.}
-
-\item{seed:}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
-
-\item{vstr:}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
 }
 \description{
 simstudy.lm
