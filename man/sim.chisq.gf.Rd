@@ -12,26 +12,34 @@ sim.chisq.gf(
   experiment.name = "experiment",
   value.name = "x",
   seed = 91,
-  vstr = 3.6
+  vstr = "3.6"
 )
 }
 \arguments{
-\item{n}{A numeric value for the number of observations in each experiment.}
+\item{n}{A numeric value indicating the number of observations in each experiment.}
 
-\item{values}{A vector of values specifying the sample space.}
+\item{values}{A numeric vector specifying the possible values (sample space).}
 
-\item{prob}{A vector of probabilities used to simulate the values.}
+\item{prob}{A numeric vector of probabilities corresponding to the values for simulation.
+If not provided, equal probabilities are assumed for all values.}
 
-\item{num.experiments}{A numeric value representing the number of simulated experiments.}
+\item{num.experiments}{An integer indicating the number of simulated experiments to conduct.}
 
-\item{experiment.name}{A character value providing the name for the column identifying the experiment.}
+\item{experiment.name}{A character string specifying the column name for identifying each experiment in the output.}
 
-\item{value.name}{A character value providing the name for the simulated values.}
+\item{value.name}{A character string specifying the column name for the simulated values in the output.}
 
-\item{seed}{A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).}
+\item{seed}{An integer specifying the seed for reproducibility. Default is 91.}
 
-\item{vstr}{A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).}
+\item{vstr}{A character string indicating the RNG version for reproducibility.
+Default is "3.6". For more details, refer to \code{\link[RNGversion]{set.seed}}.}
+}
+\value{
+A `data.table` containing the simulated experiments with specified column names.
 }
 \description{
-sim.chisq.gf
+Simulate data for chi-squared tests of goodness of fit across experiments.
+}
+\examples{
+# You might want to add an example here for users.
 }

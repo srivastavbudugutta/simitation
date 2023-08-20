@@ -2,7 +2,7 @@
 % Please edit documentation in R/simitation.R
 \name{sim.statistics.logistic}
 \alias{sim.statistics.logistic}
-\title{sim.statistics.lm}
+\title{sim.statistics.logistic}
 \usage{
 sim.statistics.logistic(simdat, the.formula, grouping.variables)
 }
@@ -14,5 +14,5 @@ sim.statistics.logistic(simdat, the.formula, grouping.variables)
 \item{grouping.variables}{A character vector of column names from simdat on which to group the data.  The intended regression model will be fit in groups based on this selection.}
 }
 \description{
-sim.statistics.lm
+sim.statistics.logistic
 }

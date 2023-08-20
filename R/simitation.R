@@ -20,16 +20,51 @@
 
 analyze.simstudy.chisq.test.gf <- function(test.statistics.chisq.test.gf, conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975)){
 
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   stat.summary <- internal.quantiles.mean.sd(x = test.statistics.chisq.test.gf$statistic, the.quantiles = the.quantiles)
 
-  p.value.summary <- data.table(
+  p.value.summary <- data.table::data.table(
     reject.proportion = mean(test.statistics.chisq.test.gf$p.value < 1 - conf.level),
     non.reject.proportion = mean(test.statistics.chisq.test.gf$p.value >= 1 - conf.level)
   )
 
   res <- list(stat.summary = stat.summary, p.value.summary = p.value.summary)
+
+  return(res)
+}
+
+
+#' sim.chisq.test.gf
+#'
+#' @description Perform a chi-squared test of goodness of fit across one or more experiments.
+#'
+#' @param simdat.chisq.gf Data for use in chi squared tests of goodness of fit across one or more experiments. The structure should be in the form returned by the function simitation::sim.chisq.gf().
+#' @param hypothesized.probs A vector of hypothesized probabilities corresponding to the values in the column specified by value.name. If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".
+#' @param correct Logical. For details, refer to the chisq.test documentation.
+#' @param experiment.name A character value providing the name of the column identifying the experiment.
+#' @param value.name A character value providing the name of the column identifying the values.
+#' @return A data.table or data.frame with the results of the chi-squared tests.
+#' @export
+
+sim.chisq.test.gf <- function(simdat.chisq.gf, hypothesized.probs = NULL, correct = TRUE, experiment.name = "experiment", value.name = "x") {
+
+  if(!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package 'data.table' is required.")
+  }
+
+  is.dt <- data.table::is.data.table(simdat.chisq.gf)
+
+  data.table::setDT(simdat.chisq.gf)
+
+  res <- simdat.chisq.gf[, internal.chisq.test.gf(x = get(value.name), hypothesized.probs = hypothesized.probs), by = experiment.name]
+
+  if(!is.dt) {
+    data.table::setDF(simdat.chisq.gf)
+    data.table::setDF(res)
+  }
 
   return(res)
 }
@@ -59,11 +94,13 @@ analyze.simstudy.chisq.test.gf <- function(test.statistics.chisq.test.gf, conf.l
 
 analyze.simstudy.chisq.test.ind <- function(test.statistics.chisq.test.ind, conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975)){
 
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   stat.summary <- internal.quantiles.mean.sd(x = test.statistics.chisq.test.ind$statistic, the.quantiles = the.quantiles)
 
-  p.value.summary <- data.table(
+  p.value.summary <- data.table::data.table(
     reject.proportion = mean(test.statistics.chisq.test.ind$p.value < 1 - conf.level),
     non.reject.proportion = mean(test.statistics.chisq.test.ind$p.value >= 1 - conf.level)
   )
@@ -72,6 +109,7 @@ analyze.simstudy.chisq.test.ind <- function(test.statistics.chisq.test.ind, conf
 
   return(res)
 }
+
 
 
 #' Analyze Simulated Linear Regression Models
@@ -96,12 +134,15 @@ analyze.simstudy.chisq.test.ind <- function(test.statistics.chisq.test.ind, conf
 
 analyze.simstudy.lm <- function(the.coefs, summary.stats, conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975), coef.name = "Coefficient", estimate.name = "Estimate", lm.p.name = "Pr(>|t|)", f.p.name = "f.pvalue"){
 
-  require(data.table)
-  is.dt.the.coefs <- is.data.table(the.coefs)
-  setDT(the.coefs)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  is.dt.summary.stats <- is.data.table(summary.stats)
-  setDT(summary.stats)
+  is.dt.the.coefs <- data.table::is.data.table(the.coefs)
+  data.table::setDT(the.coefs)
+
+  is.dt.summary.stats <- data.table::is.data.table(summary.stats)
+  data.table::setDT(summary.stats)
 
   lm.estimate.summary <- the.coefs[, internal.quantiles.mean.sd(x = get(estimate.name), the.quantiles = the.quantiles), by = coef.name]
 
@@ -125,11 +166,12 @@ analyze.simstudy.lm <- function(the.coefs, summary.stats, conf.level = 0.95, the
   res <- list(lm.estimate.summary = lm.estimate.summary, lm.p.summary = lm.p.summary, lm.stats.summary = lm.stats.summary, fstatistic.p.summary = fstatistic.p.summary)
 
   if(is.dt.the.coefs == F){
-    setDF(the.coefs)
+    data.table::setDF(the.coefs)
   }
   if(is.dt.summary.stats == F){
-    setDF(summary.stats)
+    data.table::setDF(summary.stats)
   }
+
 
   return(res)
 }
@@ -154,12 +196,15 @@ analyze.simstudy.lm <- function(the.coefs, summary.stats, conf.level = 0.95, the
 
 analyze.simstudy.logistic <- function(the.coefs, summary.stats, conf.level = 0.95, the.quantiles = c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975), coef.name = "Coefficient", estimate.name = "Estimate", logistic.p.name = "Pr(>|z|)"){
 
-  coef.copy <- copy(the.coefs)
-  summary.stats.copy <- copy(summary.stats)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  require(data.table)
-  setDT(coef.copy)
-  setDT(summary.stats.copy)
+  coef.copy <- data.table::copy(the.coefs)
+  summary.stats.copy <- data.table::copy(summary.stats)
+
+  data.table::setDT(coef.copy)
+  data.table::setDT(summary.stats.copy)
 
   logistic.estimate.summary <- coef.copy[, internal.quantiles.mean.sd(x = get(estimate.name), the.quantiles = the.quantiles, na.rm = T), by = coef.name]
 
@@ -452,59 +497,61 @@ analyze.simstudy.t2 <- function(test.statistics.t2, alternative = c("two.sided",
 
 #' sim.chisq.gf
 #'
-#' @description sim.chisq.gf
-
-#' @param  n  A numeric value for the number of observations in each experiment.
-
-#' @param values  A vector of values specifying the sample space.
-
-#' @param  prob  A vector of probabilities used to simulate the values.
-
-#' @param  num.experiments  A numeric value representing the number of simulated experiments.
-
-#' @param  experiment.name  A character value providing the name for the column identifying the experiment.
-
-#' @param  value.name  A character value providing the name for the simulated values.
-
-#' @param seed  A single numeric value, interpreted as an integer, or NULL.   See help(set.seed).
-
-#' @param  vstr  A character string containing a version number, e.g., "1.6.2". The default RNG configuration of the current R version is used if vstr is greater than the current version.  See help(set.seed).
+#' @description Simulate data for chi-squared tests of goodness of fit across experiments.
 #'
+#' @param n A numeric value indicating the number of observations in each experiment.
+#' @param values A numeric vector specifying the possible values (sample space).
+#' @param prob A numeric vector of probabilities corresponding to the values for simulation.
+#'        If not provided, equal probabilities are assumed for all values.
+#' @param num.experiments An integer indicating the number of simulated experiments to conduct.
+#' @param experiment.name A character string specifying the column name for identifying each experiment in the output.
+#' @param value.name A character string specifying the column name for the simulated values in the output.
+#' @param seed An integer specifying the seed for reproducibility. Default is 91.
+#' @param vstr A character string indicating the RNG version for reproducibility.
+#'        Default is "3.6". For more details, refer to \code{\link[RNGversion]{set.seed}}.
+#'
+#' @return A `data.table` containing the simulated experiments with specified column names.
 #' @export
+#' @examples
+#' # You might want to add an example here for users.
+sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1,
+                         experiment.name = "experiment", value.name = "x",
+                         seed = 91, vstr = "3.6") {
 
-sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1, experiment.name = "experiment", value.name = "x", seed = 91, vstr = 3.6){
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   RNGversion(vstr = vstr)
   set.seed(seed = seed)
 
-  n <- max(1, floor(n), na.rm = T)
-  num.experiments <- max(1, floor(num.experiments), na.rm = T)
+  n <- max(1, floor(n), na.rm = TRUE)
+  num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
 
   num.values <- length(values)
 
-  if(num.values == 0){
-    stop("Error:  Must specify values to build the sample.")
+  if (num.values == 0) {
+    stop("Error: Must specify values to build the sample.")
   }
 
-  if(is.null(prob) | length(prob) == 0){
+  if (is.null(prob) || length(prob) == 0) {
     prob <- rep.int(x = 1/num.values, times = num.values)
   }
-  if(length(prob) != num.values){
-    stop("Error:  length(prob) should equal length(values)")
+
+  if (length(prob) != num.values) {
+    stop("Error: length(prob) should equal length(values)")
   }
 
-  x <- sample(x = values, size = n * num.experiments, replace = T, prob = prob)
+  x <- sample(x = values, size = n * num.experiments, replace = TRUE, prob = prob)
 
-  dat <- data.table(a = rep.int(x = 1:num.experiments, times = n), b = x)
+  dat <- data.table::data.table(a = rep.int(x = 1:num.experiments, times = n), b = x)
 
-  setorderv(x = dat, cols = "a", order = 1L)
+  data.table::setorderv(x = dat, cols = "a", order = 1L)
 
   names(dat) <- c(experiment.name, value.name)
 
   return(dat)
 }
-
 
 #' sim.chisq.ind
 #'
@@ -535,30 +582,32 @@ sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1, experiment
 #'
 #'
 sim.chisq.ind <- function(n, values, probs, num.experiments = 2, experiment.name = "experiment", group.name = "group", group.values = NULL, value.name = "value", seed = 8272, vstr = 3.6){
-  require(data.table)
+
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   RNGversion(vstr = vstr)
   set.seed(seed = seed)
 
-  n <- pmax(1, floor(n), na.rm = T)
-
-  num.experiments <- max(1, floor(num.experiments), na.rm = T)
+  n <- pmax(1, floor(n), na.rm = TRUE)
+  num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
 
   num.values <- length(values)
   num.groups <- length(n)
 
   if(num.values == 0){
-    stop("Error:  Must specify values to build the sample.")
+    stop("Error: Must specify values to build the sample.")
   }
 
   if(nrow(probs) == 0){
-    stop(sprintf("Error:  Must specify probs as a numeric matrix of probabilities for the groups"))
+    stop(sprintf("Error: Must specify probs as a numeric matrix of probabilities for the groups"))
   }
   if(ncol(probs) != num.values){
-    stop("Error:  ncol(probs) should equal length(values).")
+    stop("Error: ncol(probs) should equal length(values).")
   }
   if(nrow(probs) != num.groups){
-    stop("Error:  nrow(probs) should equal length(n).")
+    stop("Error: nrow(probs) should equal length(n).")
   }
 
   if(is.null(group.values)){
@@ -566,53 +615,16 @@ sim.chisq.ind <- function(n, values, probs, num.experiments = 2, experiment.name
   }
 
   list.dat <- list()
-
   for(i in 1:num.groups){
-    list.dat[[i]] <- data.table(a = rep.int(x = 1:num.experiments, times = n[i]), b = group.values[i], c = sample(x = values, size = n[i] * num.experiments, replace = T, prob = probs[i,]))
+    list.dat[[i]] <- data.table::data.table(a = rep.int(x = 1:num.experiments, times = n[i]), b = group.values[i], c = sample(x = values, size = n[i] * num.experiments, replace = TRUE, prob = probs[i,]))
   }
 
-  dat <- rbindlist(l = list.dat)
-
-  setorderv(x = dat, cols = c("a", "b"))
+  dat <- data.table::rbindlist(l = list.dat)
+  data.table::setorderv(x = dat, cols = c("a", "b"))
 
   names(dat) <- c(experiment.name, group.name, value.name)
 
   return(dat)
-}
-
-
-
-#' sim.chisq.test
-#'
-#' @description sim.chisq.test
-
-#' @param  simdat.chisq.gf Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().
-
-#' @param hypothesized.probs A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".
-
-#' @param correct See help(chisq.test).
-
-#' @param experiment.name A character value providing the name of the column identifying the experiment.
-
-#' @param  value.name A character value providing the name of the column identifying the values.
-#'
-#' @export
-
-sim.chisq.test.gf <- function(simdat.chisq.gf, hypothesized.probs = NULL, correct = T, experiment.name = "experiment", value.name = "x"){
-  require(data.table)
-
-  is.dt <- is.data.table(simdat.chisq.gf)
-
-  setDT(simdat.chisq.gf)
-
-  res <- simdat.chisq.gf[, internal.chisq.test.gf(x = get(value.name), hypothesized.probs = hypothesized.probs), by = experiment.name]
-
-  if(is.dt == F){
-    setDF(simdat.chisq.gf)
-    setDF(res)
-  }
-
-  return(res)
 }
 
 
@@ -635,16 +647,18 @@ sim.chisq.test.gf <- function(simdat.chisq.gf, hypothesized.probs = NULL, correc
 
 sim.chisq.test.ind <- function(simdat.chisq.ind, correct = T, experiment.name = "experiment", group.name = "variable", value.name = "value"){
 
-  require(data.table)
-  is.dt <- is.data.table(simdat.chisq.ind)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  setDT(simdat.chisq.ind)
+  is.dt <- data.table::is.data.table(simdat.chisq.ind)
+  data.table::setDT(simdat.chisq.ind)
 
   res <- simdat.chisq.ind[, internal.chisq.test.ind(the.data = .SD, group.name = group.name, value.name = value.name, correct = correct), by = experiment.name]
 
-  if(is.dt == F){
-    setDF(simdat.chisq.ind)
-    setDF(res)
+  if(!is.dt){
+    data.table::setDF(simdat.chisq.ind)
+    data.table::setDF(res)
   }
 
   return(res)
@@ -674,28 +688,27 @@ sim.chisq.test.ind <- function(simdat.chisq.ind, correct = T, experiment.name = 
 
 sim.prop <- function(n, p = 0.5, num.experiments = 1, experiment.name = "experiment", value.name = "x", seed = 2470, vstr = 3.6){
 
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   RNGversion(vstr = vstr)
   set.seed(seed = seed)
-
-  n <- max(1, floor(n), na.rm = T)
-  num.experiments <- max(1, floor(num.experiments), na.rm = T)
+  n <- max(1, floor(n), na.rm = TRUE)
+  num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
 
   if(p < 0 | p > 1){
     stop("Error:  p must be a number between 0 and 1.")
   }
 
-  x <- sample(x = 0:1, size = n * num.experiments, replace = T, prob = c(1-p, p))
-
-  experiment <- sort(x = rep.int(x = 1:num.experiments, times = n), decreasing = FALSE)
-
-  dat <- data.table(experiment = experiment, x = x)
-
+  x <- sample(0:1, size = n * num.experiments, replace = TRUE, prob = c(1-p, p))
+  experiment <- sort(rep.int(1:num.experiments, n), decreasing = FALSE)
+  dat <- data.table::data.table(experiment = experiment, x = x)
   names(dat) = c(experiment.name, value.name)
 
   return(dat)
 }
+
 
 #' sim.prop.test
 #'
@@ -719,18 +732,18 @@ sim.prop <- function(n, p = 0.5, num.experiments = 1, experiment.name = "experim
 #' @export
 
 
-sim.prop.test <- function(simdat.prop, p = NULL, alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = T, experiment.name = "experiment", value.name = "x"){
-  require(data.table)
+sim.prop.test <- function(simdat.prop, p = NULL, alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE, experiment.name = "experiment", value.name = "x"){
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  is.dt <- is.data.table(simdat.prop)
-
-  setDT(simdat.prop)
-
+  is.dt <- data.table::is.data.table(simdat.prop)
+  data.table::setDT(simdat.prop)
   res <- simdat.prop[, internal.prop.test(x = get(value.name), p = p, alternative = alternative, conf.level = conf.level, correct = correct), by = experiment.name]
 
-  if(is.dt == F){
-    setDF(simdat.prop)
-    setDF(res)
+  if(!is.dt){
+    data.table::setDF(simdat.prop)
+    data.table::setDF(res)
   }
 
   return(res)
@@ -765,21 +778,23 @@ sim.prop.test <- function(simdat.prop, p = NULL, alternative = c("two.sided", "l
 
 
 sim.prop2.test <- function(simdat.prop2, p = NULL,  alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value"){
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  is.dt <- is.data.table(simdat.prop2)
-
-  setDT(simdat.prop2)
-
+  is.dt <- data.table::is.data.table(simdat.prop2)
+  data.table::setDT(simdat.prop2)
   res <- simdat.prop2[, internal.prop2.test(x = get(value.name)[get(group.name) == x.value], y = get(value.name)[get(group.name) == y.value], p = p, alternative = alternative, conf.level = conf.level, correct = correct), by = experiment.name]
 
-  if(is.dt == F){
-    setDF(simdat.prop2)
-    setDF(res)
+  if(!is.dt){
+    data.table::setDF(simdat.prop2)
+    data.table::setDF(res)
   }
 
   return(res)
 }
+
+
 
 #' sim.statistic.lm
 
@@ -794,29 +809,28 @@ sim.prop2.test <- function(simdat.prop2, p = NULL,  alternative = c("two.sided",
 #' @export
 
 sim.statistics.lm <- function(simdat, the.formula, grouping.variables){
-  require(data.table)
-
-  is.dt <- is.data.table(simdat)
-  if(is.dt == F){
-    setDT(simdat)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
   }
+
+  is.dt <- data.table::is.data.table(simdat)
+  data.table::setDT(simdat)
 
   the.coefs <- simdat[, internal.statistics.one.lm(the.data = .SD, the.formula = the.formula)$coef.table, by = grouping.variables]
-
   summary.stats <- simdat[, internal.statistics.one.lm(the.data = .SD, the.formula = the.formula)$summary.stats, by = grouping.variables]
 
-  res <- list(the.coefs = the.coefs, summary.stats = summary.stats)
-
-  if(is.dt == F){
-    setDF(simdat)
+  if(!is.dt){
+    data.table::setDF(simdat)
   }
 
-  return(res)
+  return(list(the.coefs = the.coefs, summary.stats = summary.stats))
 }
 
-#' sim.statistics.lm
 
-#' @description sim.statistics.lm
+
+#' sim.statistics.logistic
+
+#' @description sim.statistics.logistic
 
 #' @param simdat Data for use in multivariable regression models across one or more experiments.  Structure is in the form returned by the function simitation::simulation.steps().
 
@@ -827,25 +841,22 @@ sim.statistics.lm <- function(simdat, the.formula, grouping.variables){
 #' @export
 
 sim.statistics.logistic <- function(simdat, the.formula, grouping.variables){
-  require(data.table)
-
-  is.dt <- is.data.table(simdat)
-  if(is.dt == F){
-    setDT(simdat)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
   }
 
+  is.dt <- data.table::is.data.table(simdat)
+  data.table::setDT(simdat)
   the.coefs <- simdat[, internal.statistics.one.logistic(the.data = .SD, the.formula = the.formula)$coef.table, by = grouping.variables]
-
   summary.stats <- simdat[, internal.statistics.one.logistic(the.data = .SD, the.formula = the.formula)$summary.stats, by = grouping.variables]
 
-  res <- list(the.coefs = the.coefs, summary.stats = summary.stats)
-
-  if(is.dt == F){
-    setDF(simdat)
+  if(!is.dt){
+    data.table::setDF(simdat)
   }
 
-  return(res)
+  return(list(the.coefs = the.coefs, summary.stats = summary.stats))
 }
+
 
 #' sim.t
 
@@ -911,38 +922,37 @@ sim.t <- function(n, mean = 0, sd = 1, num.experiments = 1, experiment.name = "e
 
 
 sim.prop2 <- function(nx, ny, px = 0.5, py = 0.5, num.experiments = 1, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value", seed = 3471, vstr = 3.6){
-
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
   RNGversion(vstr = vstr)
   set.seed(seed = seed)
 
-  nx <- max(1, floor(nx), na.rm = T)
-  ny <- max(1, floor(ny), na.rm = T)
-  num.experiments <- max(1, floor(num.experiments), na.rm = T)
+  nx <- max(1, floor(nx), na.rm = TRUE)
+  ny <- max(1, floor(ny), na.rm = TRUE)
+  num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
 
   if(px < 0 | px > 1){
     stop("Error:  px must be a number between 0 and 1.")
   }
-
   if(py < 0 | py > 1){
     stop("Error:  py must be a number between 0 and 1.")
   }
 
-  x <- sample(x = 0:1, size = nx * num.experiments, replace = T, prob = c(1-px, px))
-  y <- sample(x = 0:1, size = ny * num.experiments, replace = T, prob = c(1-py, py))
+  x <- sample(0:1, size = nx * num.experiments, replace = TRUE, prob = c(1-px, px))
+  y <- sample(0:1, size = ny * num.experiments, replace = TRUE, prob = c(1-py, py))
 
-  x.dat <- data.table(experiment = rep.int(x = 1:num.experiments, times = nx), variable = x.value, value = x)
-  y.dat <- data.table(experiment = rep.int(x = 1:num.experiments, times = ny), variable = y.value, value = y)
+  x.dat <- data.table::data.table(experiment = rep.int(1:num.experiments, nx), variable = x.value, value = x)
+  y.dat <- data.table::data.table(experiment = rep.int(1:num.experiments, ny), variable = y.value, value = y)
 
-  res <- rbindlist(l = list(x.dat, y.dat), fill = T)
-
-  setorderv(x = res, cols = "experiment", order = 1L)
-
+  res <- data.table::rbindlist(list(x.dat, y.dat), fill = TRUE)
+  data.table::setorderv(res, "experiment", order = 1L)
   names(res) <- c(experiment.name, group.name, value.name)
 
   return(res)
 }
+
 
 
 
@@ -972,21 +982,22 @@ sim.prop2 <- function(nx, ny, px = 0.5, py = 0.5, num.experiments = 1, experimen
 
 
 sim.t.test <- function(simdat.t, alternative = c("two.sided", "less", "greater"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95, experiment.name = "experiment", value.name = "x"){
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  is.dt <- is.data.table(simdat.t)
-
-  setDT(simdat.t)
-
+  is.dt <- data.table::is.data.table(simdat.t)
+  data.table::setDT(simdat.t)
   res <- simdat.t[, internal.t.test(x = get(value.name), alternative = alternative, mu = mu, paired = paired, var.equal = var.equal, conf.level = conf.level), by = experiment.name]
 
-  if(is.dt == F){
-    setDF(simdat.t)
-    setDF(res)
+  if(!is.dt){
+    data.table::setDF(simdat.t)
+    data.table::setDF(res)
   }
 
   return(res)
 }
+
 
 
 #' sim.t2
@@ -1064,21 +1075,22 @@ sim.t2 <- function(nx, ny, meanx = 0, meany = 1, sdx = 1, sdy = 1, num.experimen
 
 
 sim.t2.test <- function(simdat.t2, alternative = c("two.sided", "less", "greater"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value"){
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  is.dt <- is.data.table(simdat.t2)
-
-  setDT(simdat.t2)
-
+  is.dt <- data.table::is.data.table(simdat.t2)
+  data.table::setDT(simdat.t2)
   res <- simdat.t2[, internal.t2.test(x = get(value.name)[get(group.name) == x.value], y = get(value.name)[get(group.name) == y.value], alternative = alternative, mu = mu, paired = paired, var.equal = var.equal, conf.level = conf.level), by = experiment.name]
 
-  if(is.dt == F){
-    setDF(simdat.t2)
-    setDF(res)
+  if(!is.dt){
+    data.table::setDF(simdat.t2)
+    data.table::setDF(res)
   }
 
   return(res)
 }
+
 
 
 #' simstudy.chisq.test.gf
@@ -1736,12 +1748,12 @@ buildsim.binomial <- function(the.formula, the.variable, n, num.experiments = 1)
 
 buildsim.lm <- function(dat, the.formula, the.variable, n, num.experiments = 1){
 
-  is.dt <- is.data.table(dat)
-
-  if(is.dt == FALSE){
-    require(data.table)
-    setDT(dat)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
   }
+
+  is.dt <- data.table::is.data.table(dat)
+  data.table::setDT(dat)
 
   the.chars <- strsplit(x = the.formula, split = "")[[1]]
   first.open.paren <- which(the.chars == "(")[1]
@@ -1782,8 +1794,8 @@ buildsim.lm <- function(dat, the.formula, the.variable, n, num.experiments = 1){
   res <- data.frame(V1 = the.values)
   names(res) <- c(the.variable)
 
-  if(is.dt == FALSE){
-    setDF(dat)
+  if(!is.dt){
+    data.table::setDF(dat)
   }
 
   return(res)
@@ -1807,12 +1819,12 @@ buildsim.lm <- function(dat, the.formula, the.variable, n, num.experiments = 1){
 
 buildsim.logistic <- function(dat, the.formula, the.variable, n, num.experiments = 1){
 
-  is.dt <- is.data.table(dat)
-
-  if(is.dt == FALSE){
-    require(data.table)
-    setDT(dat)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
   }
+
+  is.dt <- data.table::is.data.table(dat)
+  data.table::setDT(dat)
 
   the.chars <- strsplit(x = the.formula, split = "")[[1]]
   first.open.paren <- which(the.chars == "(")[1]
@@ -1841,8 +1853,8 @@ buildsim.logistic <- function(dat, the.formula, the.variable, n, num.experiments
   res <- data.frame(V1 = the.values)
   names(res) <- c(the.variable)
 
-  if(is.dt == FALSE){
-    setDF(dat)
+  if(!is.dt){
+    data.table::setDF(dat)
   }
 
   return(res)
@@ -2045,8 +2057,6 @@ buildsim.uniform <- function(the.formula, the.variable, n, num.experiments = 1){
 identify.distribution <- function(dat = NULL, the.step, n, num.experiments, step.split = "~", value.split = ","){
   pieces.step <- trimws(strsplit(x = the.step, split = step.split)[[1]])
 
-  require(data.table)
-
   the.variable <- pieces.step[1]
   the.formula <- pieces.step[2]
   the.chars <- strsplit(x = the.formula, split = "")[[1]]
@@ -2089,7 +2099,7 @@ identify.distribution <- function(dat = NULL, the.step, n, num.experiments, step
   }
 
   if(!is.null(dat)){
-    res <- data.table(dat, sim.variable)
+    res <- data.table::data.table(dat, sim.variable)
   }
   if(is.null(dat)){
     res <- sim.variable
@@ -2136,9 +2146,8 @@ internal.chisq.test.gf <- function(x, hypothesized.probs = NULL, correct = TRUE)
 
 internal.chisq.test.ind <- function(the.data, group.name, value.name, correct = TRUE){
 
-  require(data.table)
-  setDT(the.data)
-  tab <- table(the.data[, get(value.name)], the.data[, get(group.name)])
+  data.table::setDT(the.data)
+  tab <- table(the.data[, base::get(value.name)], the.data[, base::get(group.name)])
 
   the.test <- chisq.test(x = tab, correct = correct, p = hypothesized.probs)
 
@@ -2207,12 +2216,10 @@ internal.prop2.test <- function(x, y, p = NULL,  alternative = c("two.sided", "l
 
 internal.quantiles.mean.sd <- function(x, the.quantiles, na.rm = T){
 
-  require(data.table)
-
   if(is.null(the.quantiles) | length(the.quantiles) == 0){
     the.quantiles <- c(0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975)
   }
-  stat.summary <- as.data.table(x = t(quantile(x = x, probs = the.quantiles, na.rm = na.rm)))
+  stat.summary <- data.table::as.data.table(x = t(quantile(x = x, probs = the.quantiles, na.rm = na.rm)))
 
   names(stat.summary) <- gsub(pattern = "%", replacement = "", x = sprintf("q.%s", names(stat.summary)), fixed = T)
 
@@ -2223,34 +2230,6 @@ internal.quantiles.mean.sd <- function(x, the.quantiles, na.rm = T){
 }
 
 
-#' Internal function for Summary Statistics of Linear Model
-#'
-#' @description Computes the summary statistics for the linear model fit on the given data.
-#'
-#' @param the.data The data table.
-#' @param the.formula A formula specifying the linear model.
-#' @return A list containing the coefficient table and summary statistics.
-
-internal.statistics.one.lm <- function(the.data, the.formula){
-
-  require(data.table)
-
-  mod <- lm(formula = the.formula, data = the.data)
-
-  summary.mod <- summary(mod)
-  coef.table <- as.data.table(x = summary.mod$coefficients, keep.rownames = T)
-  names(coef.table)[names(coef.table) == "rn"] <- "Coefficient"
-
-  fstats <- as.data.table(t(summary.mod$fstatistic))
-  fstats$p = pf(q = fstats$value, df1 = fstats$numdf, df2 = fstats$dendf, lower.tail = F)
-
-  rse <- sqrt(sum(summary.mod$residuals^2) / summary.mod$df[2])
-
-  summary.stats <- data.table(sigma = summary.mod$sigma, df = summary.mod$df[2], rse = rse, r.squared = summary.mod$r.squared, adj.r.squared = summary.mod$adj.r.squared, fstatistic = fstats$value, f.numdf = fstats$numdf, f.dendf = fstats$dendf, f.pvalue = fstats$p)
-
-  res <- list(coef.table = coef.table, summary.stats = summary.stats)
-}
-
 
 #' Internal function for Summary Statistics of Linear Model
 #'
@@ -2258,27 +2237,29 @@ internal.statistics.one.lm <- function(the.data, the.formula){
 #'
 #' @param the.data The data table.
 #' @param the.formula A formula specifying the linear model.
-#' @return A list containing the coefficient table and summary statistics.
 
 internal.statistics.one.lm <- function(the.data, the.formula){
 
-  require(data.table)
+  if(!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package 'data.table' is required.")
+  }
 
   mod <- lm(formula = the.formula, data = the.data)
 
   summary.mod <- summary(mod)
-  coef.table <- as.data.table(x = summary.mod$coefficients, keep.rownames = T)
+  coef.table <- data.table::as.data.table(x = summary.mod$coefficients, keep.rownames = TRUE)
   names(coef.table)[names(coef.table) == "rn"] <- "Coefficient"
 
-  fstats <- as.data.table(t(summary.mod$fstatistic))
-  fstats$p = pf(q = fstats$value, df1 = fstats$numdf, df2 = fstats$dendf, lower.tail = F)
+  fstats <- data.table::as.data.table(t(summary.mod$fstatistic))
+  fstats$p <- pf(q = fstats$value, df1 = fstats$numdf, df2 = fstats$dendf, lower.tail = FALSE)
 
   rse <- sqrt(sum(summary.mod$residuals^2) / summary.mod$df[2])
 
-  summary.stats <- data.table(sigma = summary.mod$sigma, df = summary.mod$df[2], rse = rse, r.squared = summary.mod$r.squared, adj.r.squared = summary.mod$adj.r.squared, fstatistic = fstats$value, f.numdf = fstats$numdf, f.dendf = fstats$dendf, f.pvalue = fstats$p)
+  summary.stats <- data.table::data.table(sigma = summary.mod$sigma, df = summary.mod$df[2], rse = rse, r.squared = summary.mod$r.squared, adj.r.squared = summary.mod$adj.r.squared, fstatistic = fstats$value, f.numdf = fstats$numdf, f.dendf = fstats$dendf, f.pvalue = fstats$p)
 
   res <- list(coef.table = coef.table, summary.stats = summary.stats)
 }
+
 
 
 #' Internal function for Summary Statistics of Linear Model
@@ -2291,12 +2272,10 @@ internal.statistics.one.lm <- function(the.data, the.formula){
 
 internal.statistics.onelm <- function(the.data, the.formula){
 
-  require(data.table)
-
   mod <- lm(formula = the.formula, data = the.data)
 
   summary.mod <- summary(mod)
-  coef.table <- as.data.table(x = summary.mod$coefficients, keep.rownames = T)
+  coef.table <- data.table::as.data.table(x = summary.mod$coefficients, keep.rownames = T)
   names(coef.table)[names(coef.table) == "rn"] <- "Coefficient"
 
   fstats <- as.data.table(t(summary.mod$fstatistic))
@@ -2320,17 +2299,22 @@ internal.statistics.onelm <- function(the.data, the.formula){
 
 
 internal.statistics.one.logistic <- function(the.data, the.formula){
-  require(data.table)
+  if(!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package 'data.table' is required.")
+  }
+
   mod <- glm(formula = the.formula, family = "binomial", data = the.data)
 
   summary.mod <- summary(mod)
-  coef.table <- as.data.table(x = summary.mod$coefficients, keep.rownames = T)
+  coef.table <- data.table::as.data.table(x = summary.mod$coefficients, keep.rownames = TRUE)
   names(coef.table)[names(coef.table) == "rn"] <- "Coefficient"
 
-  summary.stats <- data.table(deviance = summary.mod$deviance, aic = summary.mod$aic, df.residual = summary.mod$df.residual, null.deviance = summary.mod$null.deviance, df.null = summary.mod$df.null, iter = summary.mod$iter, dispersion = summary.mod$dispersion)
+  summary.stats <- data.table::data.table(deviance = summary.mod$deviance, aic = summary.mod$aic, df.residual = summary.mod$df.residual, null.deviance = summary.mod$null.deviance, df.null = summary.mod$df.null, iter = summary.mod$iter, dispersion = summary.mod$dispersion)
 
   res <- list(coef.table = coef.table, summary.stats = summary.stats)
+
 }
+
 
 
 
@@ -2367,16 +2351,19 @@ internal.t2.test <- function(x, y, alternative = c("two.sided", "less", "greater
 #' @param na.rm A logical indicating if missing values should be removed.
 #' @return A data table with quantile values.
 
-quantile.dt <- function(x, probs, na.rm = T){
-  require(data.table)
+quantile.dt <- function(x, probs, na.rm = TRUE){
+  if(!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package 'data.table' is required.")
+  }
 
   y <- quantile(x = x, probs = probs, na.rm = na.rm)
 
-  res <- as.data.table(t(as.matrix(y)))
-  names(res) <- gsub(pattern = "%", replacement = "", x = sprintf("q.%s", names(res)), fixed = T)
+  res <- data.table::as.data.table(t(as.matrix(y)))
+  names(res) <- gsub(pattern = "%", replacement = "", x = sprintf("q.%s", names(res)), fixed = TRUE)
 
   return(res)
 }
+
 
 #' Internal function for Normal Distribution Simulation
 #'
@@ -2395,11 +2382,13 @@ quantile.dt <- function(x, probs, na.rm = T){
 
 sim.norm <- function(n.values, mean.values, sd.values, num.experiments = 1, variable.names = NULL, seed = 1978, vstr = 3.6){
 
-  require(data.table)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The 'data.table' package is required.")
+  }
 
-  n.values <- pmax(1, floor(n.values), na.rm = T)
+  n.values <- pmax(1, floor(n.values), na.rm = TRUE)
 
-  num.experiments <- max(1, floor(num.experiments), na.rm = T)
+  num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
 
   if(sum(sd.values <= 0) > 0){
     stop("Error:  sd.values must be a vector of positive numbers.")
@@ -2422,11 +2411,9 @@ sim.norm <- function(n.values, mean.values, sd.values, num.experiments = 1, vari
     list.variables[[i]] <- rep.int(x = variable.names[i], times = n.values[i] * num.experiments)
   }
 
-  dat <- data.table(experiment = unlist(list.experiment), variable = unlist(list.variables), value = unlist(list.values))
+  dat <- data.table::data.table(experiment = unlist(list.experiment), variable = unlist(list.variables), value = unlist(list.values))
 
-  setorderv(x = dat, cols = "experiment", order = 1L)
+  data.table::setorderv(x = dat, cols = "experiment", order = 1L)
 
   return(dat)
 }
-
-

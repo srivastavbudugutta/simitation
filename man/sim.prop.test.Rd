@@ -9,7 +9,7 @@ sim.prop.test(
   p = NULL,
   alternative = c("two.sided", "less", "greater"),
   conf.level = 0.95,
-  correct = T,
+  correct = TRUE,
   experiment.name = "experiment",
   value.name = "x"
 )

@@ -4,7 +4,7 @@
 \alias{quantile.dt}
 \title{Internal function for Quantiles Calculation}
 \usage{
-\method{quantile}{dt}(x, probs, na.rm = T)
+\method{quantile}{dt}(x, probs, na.rm = TRUE)
 }
 \arguments{
 \item{x}{A numeric vector.}

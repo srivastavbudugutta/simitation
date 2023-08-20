@@ -2,27 +2,30 @@
 % Please edit documentation in R/simitation.R
 \name{sim.chisq.test.gf}
 \alias{sim.chisq.test.gf}
-\title{sim.chisq.test}
+\title{sim.chisq.test.gf}
 \usage{
 sim.chisq.test.gf(
   simdat.chisq.gf,
   hypothesized.probs = NULL,
-  correct = T,
+  correct = TRUE,
   experiment.name = "experiment",
   value.name = "x"
 )
 }
 \arguments{
-\item{simdat.chisq.gf}{Data for use in chi squared tests of goodness of fit across one or more experiments.  Structure is in the form returned by the function simitation::sim.chisq.gf().}
+\item{simdat.chisq.gf}{Data for use in chi squared tests of goodness of fit across one or more experiments. The structure should be in the form returned by the function simitation::sim.chisq.gf().}
 
-\item{hypothesized.probs}{A vector of hypothesized probabilities corresponding to the values in the column specified by value.name.  If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".}
+\item{hypothesized.probs}{A vector of hypothesized probabilities corresponding to the values in the column specified by value.name. If the values include c("B", "A", "C"), then a probability vector of c(0.5, 0.3, 0.2) would associate a value of 0.5 with "A", 0.3 with "B", and 0.2 with "C".}
 
-\item{correct}{See help(chisq.test).}
+\item{correct}{Logical. For details, refer to the chisq.test documentation.}
 
 \item{experiment.name}{A character value providing the name of the column identifying the experiment.}
 
 \item{value.name}{A character value providing the name of the column identifying the values.}
 }
+\value{
+A data.table or data.frame with the results of the chi-squared tests.
+}
 \description{
-sim.chisq.test
+Perform a chi-squared test of goodness of fit across one or more experiments.
 }
