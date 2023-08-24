@@ -3,10 +3,11 @@ Title: simitation
 Version: 0.0.1
 Authors@R: c(
     person("David", "Shilane", , "david.shilane@columbia.edu", c("aut")),
-    person("Mayur", "Bansal", , "mb4511@columbia.edu", c("ctb","cre"))
+    person("Mayur", "Bansal", , "mb4511@columbia.edu", c("ctb","cre")),
+    person("Srivastav", "Budugutta", , "sb4788@columbia.edu", c("ctb"))
     )
 Depends: R (>= 3.1.0)
-Description: The package simitation provides methods for data analyses and cleaning that can be flexibly applied across multiple variables and in groups. These include cleaning accidental text, contingent calculations, counting missing data, and building summarizations of the data.
+Description: The package simitation provides methods for data analyses and cleaning that can be flexibly applied across multiple variables and in groups.  These include cleaning accidental text, contingent calculations,  counting missing data, and building summarizations of the data.
 License: GPL-3 
 Encoding: UTF-8
 RoxygenNote: 7.2.3
