@@ -16,6 +16,8 @@ library(data.table)
 library(simitation)
 ```
 
+**This is Part 2 of the vignette.  Please refer to 'Introduction_to_Simitation' for Part 1.**
+
 #### Two-Sample Tests of the Difference of Proportions {.tabset}
 
 ##### Generating Data {.tabset}
