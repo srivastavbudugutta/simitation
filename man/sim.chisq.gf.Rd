@@ -40,6 +40,3 @@ A `data.table` containing the simulated experiments with specified column names.
 \description{
 Simulate data for chi-squared tests of goodness of fit across experiments.
 }
-\examples{
-# You might want to add an example here for users.
-}

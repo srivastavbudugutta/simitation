@@ -512,7 +512,6 @@ analyze.simstudy.t2 <- function(test.statistics.t2, alternative = c("two.sided",
 #'
 #' @return A `data.table` containing the simulated experiments with specified column names.
 #' @export
-#' @examples
 sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1,
                          experiment.name = "experiment", value.name = "x",
                          seed = 91, vstr = "3.6") {

@@ -22,4 +22,10 @@ Suggests:
 VignetteBuilder: knitr
 Imports:
     data.table
+NeedsCompilation: no
+Author: David Shilane [aut],
+  Mayur Bansal [ctb, cre],
+  Srivastav Budugutta [ctb]
+Maintainer: Mayur Bansal <mb4511@columbia.edu>
+Repository: CRAN
 Config/testthat/edition: 3
