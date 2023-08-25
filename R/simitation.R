@@ -507,8 +507,7 @@ analyze.simstudy.t2 <- function(test.statistics.t2, alternative = c("two.sided",
 #' @param experiment.name A character string specifying the column name for identifying each experiment in the output.
 #' @param value.name A character string specifying the column name for the simulated values in the output.
 #' @param seed An integer specifying the seed for reproducibility. Default is 91.
-#' @param vstr A character string indicating the RNG version for reproducibility.
-#'        Default is "3.6". For more details, refer to \code{\link[RNGversion]{set.seed}}.
+#' @param vstr A numeric or character string specifying the seed for random number generation to ensure reproducibility. Default is "3.6". For more details, refer to \code{\link[base]{set.seed}}.
 #'
 #' @return A `data.table` containing the simulated experiments with specified column names.
 #' @export
@@ -520,7 +519,7 @@ sim.chisq.gf <- function(n, values, prob = NULL, num.experiments = 1,
     stop("The 'data.table' package is required.")
   }
 
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
 
   n <- max(1, floor(n), na.rm = TRUE)
@@ -585,7 +584,7 @@ sim.chisq.ind <- function(n, values, probs, num.experiments = 2, experiment.name
     stop("The 'data.table' package is required.")
   }
 
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
 
   n <- pmax(1, floor(n), na.rm = TRUE)
@@ -690,7 +689,7 @@ sim.prop <- function(n, p = 0.5, num.experiments = 1, experiment.name = "experim
     stop("The 'data.table' package is required.")
   }
 
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
   n <- max(1, floor(n), na.rm = TRUE)
   num.experiments <- max(1, floor(num.experiments), na.rm = TRUE)
@@ -924,7 +923,7 @@ sim.prop2 <- function(nx, ny, px = 0.5, py = 0.5, num.experiments = 1, experimen
     stop("The 'data.table' package is required.")
   }
 
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
 
   nx <- max(1, floor(nx), na.rm = TRUE)
@@ -1578,7 +1577,7 @@ simulation.steps <- function(the.steps, n, num.experiments = 1, experiment.name 
   if(num.steps < 1){
     stop("Error:  the.steps hould specify a character vector with the sequence of steps to build the simulation.")
   }
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
 
   dat <- NULL
@@ -2392,7 +2391,7 @@ sim.norm <- function(n.values, mean.values, sd.values, num.experiments = 1, vari
     stop("Error:  sd.values must be a vector of positive numbers.")
   }
 
-  RNGversion(vstr = vstr)
+  RNGkind("Mersenne-Twister")
   set.seed(seed = seed)
 
   num.variables <- length(n.values)

@@ -1,13 +1,13 @@
 Package: simitation
-Title: simitation
-Version: 0.0.1
+Title: Simplified Simulations
+Version: 0.0.2
 Authors@R: c(
     person("David", "Shilane", , "david.shilane@columbia.edu", c("aut")),
-    person("Mayur", "Bansal", , "mb4511@columbia.edu", c("ctb","cre")),
-    person("Srivastav", "Budugutta", , "sb4788@columbia.edu", c("ctb"))
+    person("Srivastav", "Budugutta", , "sb4788@columbia.edu", c("ctb","cre")),
+    person("Mayur", "Bansal", , "mb4511@columbia.edu", c("ctb"))
     )
 Depends: R (>= 3.1.0)
-Description: The package simitation provides methods for data analyses and cleaning that can be flexibly applied across multiple variables and in groups.  These include cleaning accidental text, contingent calculations,  counting missing data, and building summarizations of the data.
+Description: Equips users with tools for flexible data analyses and cleaning across various variables and groups. Features include removing unintended text, executing contingent calculations, tallying missing data, and constructing data summarization.
 License: GPL-3 
 Encoding: UTF-8
 RoxygenNote: 7.2.3
@@ -24,8 +24,8 @@ Imports:
     data.table
 NeedsCompilation: no
 Author: David Shilane [aut],
-  Mayur Bansal [ctb, cre],
-  Srivastav Budugutta [ctb]
-Maintainer: Mayur Bansal <mb4511@columbia.edu>
+  Srivastav Budugutta [ctb, cre],
+  Mayur Bansal [ctb]
+Maintainer: Srivastav Budugutta <sb4788@columbia.edu>
 Repository: CRAN
 Config/testthat/edition: 3

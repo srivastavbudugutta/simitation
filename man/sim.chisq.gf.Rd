@@ -31,8 +31,7 @@ If not provided, equal probabilities are assumed for all values.}
 
 \item{seed}{An integer specifying the seed for reproducibility. Default is 91.}
 
-\item{vstr}{A character string indicating the RNG version for reproducibility.
-Default is "3.6". For more details, refer to \code{\link[RNGversion]{set.seed}}.}
+\item{vstr}{A numeric or character string specifying the seed for random number generation to ensure reproducibility. Default is "3.6". For more details, refer to \code{\link[base]{set.seed}}.}
 }
 \value{
 A `data.table` containing the simulated experiments with specified column names.
