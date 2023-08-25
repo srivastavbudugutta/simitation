@@ -55,7 +55,7 @@ library(simitation)
 We begin with a setting for an experiment that will collect $n = 25$ independent, identically distributed data points from a Normal distribution.  We use the sim.t() method to generate data for 2 separate experiments.  All of the simulated records are aggregated into a single data.table object.
 
 ```{r }
-simdat.t <- sim.t(n = 25, mean = 0.3, sd = 1,  num.experiments = 100, experiment.name = "experiment", value.name = "x", seed = 2187)
+simdat.t <- sim.t(n = 25, mean = 0.3, sd = 1,  num.experiments = 2000, experiment.name = "experiment", value.name = "x", seed = 2187)
 print(simdat.t)
 ```
 
@@ -88,7 +88,7 @@ print(analysis.t)
 The **simstudy.t** method is used to a) generate data for experiments with one group and a continuous outcome that follows a Normal distribution, b) implement one-sample $t$ tests, and c) analyze these tests across repeated experiments.
 
 ```{r }
-study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 1000, alternative = "greater", mu = 0, conf.level = 0.95, the.quantiles = c(0.025, 0.975), experiment.name = "experiment",value.name = "x", seed = 817)
+study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 2000, alternative = "greater", mu = 0, conf.level = 0.95, the.quantiles = c(0.025, 0.975), experiment.name = "experiment",value.name = "x", seed = 817)
 print(study.t)
 ```
 
@@ -99,7 +99,7 @@ print(study.t)
 Simulations based on a two-sample $t$ test follow a similar form.  Here we are simulating an experiment that will collect $n_x = 30$ data points for group $x$ and $n_y = 40$ records for group $y$.  This is generated with $\mu_x = 0$ and $\mu_y = 0.2$, with a common standard deviation of $\sigma_x = \sigma_y = 1$.  The **sim.t2** method generates data for $B = 500$ experiments.  
 
 ```{r }
-simdat.t2 <- sim.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 500, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value", seed = 17)
+simdat.t2 <- sim.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 2000, experiment.name = "experiment", group.name = "group", x.value = "x", y.value = "y", value.name = "value", seed = 17)
 print(simdat.t2)
 ```
 
@@ -131,7 +131,7 @@ print(analysis.t2)
 The **simstudy.t2** method is used to a) generate data for experiments with two groups and a continuous outcome that follows a Normal distribution, b) implement two-sample $t$ tests, and c) analyze these tests across repeated experiments.
 
 ```{r }
-study.t2 <- simstudy.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 500, alternative = "less", mu = 0, conf.level = 0.9, the.quantiles = c(0.1, 0.5, 0.9), experiment.name = "experiment_id", group.name = "category", x.value = "a", y.value = "b", value.name = "measurement", seed = 41)
+study.t2 <- simstudy.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1, sdy = 1, num.experiments = 2000, alternative = "less", mu = 0, conf.level = 0.9, the.quantiles = c(0.1, 0.5, 0.9), experiment.name = "experiment_id", group.name = "category", x.value = "a", y.value = "b", value.name = "measurement", seed = 41)
 print(study.t2)
 ```
 
@@ -144,7 +144,7 @@ print(study.t2)
 The **sim.prop** method is used to generate binary data for a one-sample proportions test based on a probability of success $p$, the sample size for one experiment $n$, and the overall number of experiments $B$.
 
 ```{r }
-simdat.prop <- sim.prop(n = 30, p = 0.45, num.experiments = 1000, experiment.name = "simulation_id", value.name = "success", seed = 104)
+simdat.prop <- sim.prop(n = 30, p = 0.45, num.experiments = 2000, experiment.name = "simulation_id", value.name = "success", seed = 104)
 print(simdat.prop)
 ```
 
@@ -173,7 +173,7 @@ The **simstudy.prop2** method is used to a) generate data for experiments with o
 
 
 ```{r }
-study.prop <- simstudy.prop(n = 30, p.actual = 0.42, p.hypothesized = 0.5, num.experiments = 500, alternative = "less", conf.level = 0.92, correct = T, the.quantiles = c(0.04, 0.5, 0.96), experiment.name = "simulation_id", value.name = "success", seed = 8001)
+study.prop <- simstudy.prop(n = 30, p.actual = 0.42, p.hypothesized = 0.5, num.experiments = 2000, alternative = "less", conf.level = 0.92, correct = T, the.quantiles = c(0.04, 0.5, 0.96), experiment.name = "simulation_id", value.name = "success", seed = 8001)
 print(study.prop)
 ```
 **NOTE:  Please see 'Introduction_to_Simitation_2' for the second part of this vignette..**

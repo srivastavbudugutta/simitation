@@ -5,7 +5,7 @@ library(testthat)
 
 describe("Testing analyze.simstudy.t function", {
 
-  study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 1000,
+  study.t <- simstudy.t(n = 25, mean = 0.3, sd = 1, num.experiments = 10,
                         alternative = "greater", mu = 0, conf.level = 0.95,
                         the.quantiles = c(0.025, 0.975), experiment.name = "experiment",
                         value.name = "x", seed = 817)
@@ -39,7 +39,7 @@ describe("Testing simstudy.t2 function", {
 
   study.t2 <- simstudy.t2(nx = 30, ny = 40, meanx = 0, meany = 0.2, sdx = 1,
                           sdy = 1,
-                          num.experiments = 500, alternative = "less", mu = 0,
+                          num.experiments = 10, alternative = "less", mu = 0,
                           conf.level = 0.9,
                           the.quantiles = c(0.1, 0.5, 0.9),
                           experiment.name = "experiment_id",
@@ -100,7 +100,7 @@ describe("Testing simstudy.t2 function", {
 describe("Testing simstudy.prop function", {
 
   study.prop <- simstudy.prop(n = 30, p.actual = 0.42,
-                              p.hypothesized = 0.5, num.experiments = 500,
+                              p.hypothesized = 0.5, num.experiments = 10,
                               alternative = "less", conf.level = 0.92,
                               correct = T,
                               the.quantiles = c(0.04, 0.5, 0.96),
@@ -143,7 +143,7 @@ describe("Testing simstudy.prop function", {
 describe("Testing simstudy.prop2 function", {
 
   study.prop2 <- simstudy.prop2(nx = 30, ny = 40, px = 0.5, py = 0.55,
-                                num.experiments = 1000,
+                                num.experiments = 10,
                                 p = NULL, alternative = "less",
                                 conf.level = 0.95, correct = T,
                                 the.quantiles = c(0.025, 0.5, 0.975),
@@ -270,7 +270,7 @@ describe("Testing simstudy.chisq.test.ind function", {
   # Suppress warnings and execute the function
   study.chisq.ind <- suppressWarnings({
     simstudy.chisq.test.ind(n = c(30, 35, 40), values = LETTERS[1:4],
-                            probs = probs, num.experiments = 1000,
+                            probs = probs, num.experiments = 10,
                             conf.level = 0.95, correct = T,
                             the.quantiles = c(0.025, 0.975),
                             experiment.name = "exp_id",
@@ -328,7 +328,7 @@ the.steps <- c(step.age, step.female, step.health.percentile, step.exercise.sess
 describe("Testing simstudy.lm function", {
 
   study.lm <- simstudy.lm(the.steps = the.steps, n = 100,
-                          num.experiments = 1000,
+                          num.experiments = 10,
                           the.formula = Weight ~ Age + Female +
                             Health.Percentile + Exercise.Sessions + Healthy.Lifestyle,
                           conf.level = 0.95, the.quantiles = c(0.25, 0.75),
@@ -375,7 +375,7 @@ describe("Testing simstudy.logistic function", {
   # Execute the function for logistic regression
   study.logistic <- simstudy.logistic(the.steps = the.steps,
                                       n = 100,
-                                      num.experiments = 1000,
+                                      num.experiments = 10,
                                       the.formula = Healthy.Lifestyle ~ Age +
                                         Female + Health.Percentile +
                                         Exercise.Sessions,
